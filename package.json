@@ -1,0 +1,32 @@
+{
+  "name": "cse341-team-project",
+  "version": "1.0.0",
+  "description": "score tracking app for cse341 team project",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "start:dev": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/spencerasj/cse341-team-project.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/spencerasj/cse341-team-project/issues"
+  },
+  "homepage": "https://github.com/spencerasj/cse341-team-project#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.14"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "csurf": "^1.11.0",
+    "dotenv": "^10.0.0",
+    "ejs": "^3.1.6",
+    "express": "^4.17.1",
+    "mongoose": "^6.0.12"
+  }
+}
