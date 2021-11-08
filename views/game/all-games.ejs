@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title><%= title %></title>
+
+    <link rel="stylesheet" type="text/css" href="/css/styles.css" />
+  </head>
+
+  <body>
+    <%- include('../includes/nav.ejs') %>
+
+    <main>
+      <div>
+        <% if (games.length > 0) { %>
+        <p class="text-center text-gray-600 mt-2">
+          Click a game to edit or delete.
+        </p>
+        <% } %>
+      </div>
+
+      <ul>
+        <% for (let game of games) { %>
+        <li>
+          <%= game.title %>
+
+          <span> <%= game.description %> </span>
+          <span> <%= game.status %> </span>
+        </li>
+        <% } %>
+      </ul>
+
+      <a href="/game/add-game"> Create a new game </a>
+    </main>
+
+    <%- include('../includes/footer.ejs') %>
+  </body>
+</html>
