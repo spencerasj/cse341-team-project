@@ -4,7 +4,7 @@ require("dotenv").config();
 const mongoose = require("mongoose");
 const cors = require("cors");
 
-const MONGODB_URI = process.env.MONGODB_URI;
+const MONGODB_URL = process.env.MONGODB_URL;
 const PORT = process.env.PORT || 5000; // So we can run on heroku || (OR) localhost:5000
 
 const app = express();
@@ -27,7 +27,7 @@ const options = {
 };
 
 mongoose
-  .connect(MONGODB_URI)
+  .connect(MONGODB_URL)
   .then((result) => {
     app.listen(PORT, () => console.log(`Listening on ${PORT}`));
   })
