@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title><%= title %></title>
+
+    <link rel="stylesheet" type="text/css" href="/css/styles.css" />
+  </head>
+
+  <body>
+    <%- include ("../includes/nav.ejs") %>
+
+    <main>
+      <div>
+        <h1><%= title %></h1>
+
+        <form
+          method="POST"
+          action="/game/<% if (editing) { %>edit-game<% } else { %>add-game<% } %>"
+          enctype="multipart/form-data"
+        >
+          <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+          <div class="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-3">
+            <div class="sm:col-span-3">
+              <label
+                for="title"
+                class="block text-sm font-medium text-gray-700"
+              >
+                Name
+              </label>
+              <div>
+                <input
+                  required
+                  type="text"
+                  name="name"
+                  id="name"
+                  value="<% if
+                  (editing || hasError) { %><%= game.name %><% } %>"
+                />
+              </div>
+            </div>
+
+            <div>
+              <label for="description"> Description </label>
+              <div>
+                <textarea required id="description" name="description" rows="3">
+                        <% if (editing || hasError) { %><%= game.description %><% } %></textarea
+                >
+              </div>
+            </div>
+
+            <div>
+              <label for="status"> Status </label>
+              <div class="mt-1">
+                <input
+                  required
+                  name="status"
+                  id="status"
+                  type="text"
+                  value="<% if (editing || hasError) { %><%= game.status %><% } %>"
+                />
+              </div>
+            </div>
+
+            <% if (editing) { %>
+            <input type="hidden" name="gameId" value="<%= game._id %>" />
+            <% } %>
+
+            <div>
+              <button type="submit">
+                <% if (editing) { %>Update<% } else { %>Add<% } %> Game
+              </button>
+            </div>
+          </div>
+        </form>
+
+        <% if (editing) { %>
+        <form action="/game/delete-game" method="POST">
+          <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+          <input type="hidden" name="gameId" value="<%= game._id %>" />
+
+          <button type="submit">Delete</button>
+        </form>
+        <% } %>
+      </div>
+    </main>
+  </body>
+</html>
