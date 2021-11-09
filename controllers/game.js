@@ -1,16 +1,17 @@
 const { validationResult } = require("express-validator");
-const fileHelper = require("../util/file");
 const Game = require("../models/game");
 
 exports.getAllGames = (req, res, next) => {
   // TODO: Need to make this filter all games where the user is a player
-  Game.find({ players: req.user._id })
+
+  Game.find()
+    // Game.find({ players: req.user._id })
     // .select('')
     // .populate('userId')
     .then((games) => {
-      res.render("game/all-games", {
+      res.render("game/all", {
         title: "List of Games",
-        path: "/games/all-games",
+        path: "/games/all",
         games: games,
       });
     })
@@ -22,9 +23,9 @@ exports.getAllGames = (req, res, next) => {
 };
 
 exports.getAddGame = (req, res, next) => {
-  res.render("game/edit-game", {
+  res.render("game/edit", {
     title: "Add Game",
-    path: "/game/add-game",
+    path: "/game/add",
     editing: false,
     hasError: false,
     errorMessage: null,
@@ -35,15 +36,15 @@ exports.getAddGame = (req, res, next) => {
 exports.postAddGame = (req, res, next) => {
   const name = req.body.name;
   const description = req.body.description;
-  const status = req.body.status,
+  const status = req.body.status;
 
   const errors = validationResult(req);
 
   if (!errors.isEmpty()) {
     // console.log(errors.array());
-    return res.status(422).render("game/edit-game", {
+    return res.status(422).render("game/edit", {
       title: "Add Game",
-      path: "/game/add-game",
+      path: "/game/add",
       editing: false,
       hasError: true,
       game: {
@@ -67,7 +68,7 @@ exports.postAddGame = (req, res, next) => {
   game
     .save()
     .then((result) => {
-      res.redirect("/games/all-games");
+      res.redirect("/games/all");
     })
     .catch((err) => {
       const error = new Error(err);
@@ -81,16 +82,16 @@ exports.postAddPlayerToGame = (req, res, next) => {
   const playerId = req.body.playerId;
 
   // Get game from db
-    //  If user not a game master:
-      // Error message
-    // If user is a game master:
-      // get user with playerId:
+  //  If user not a game master:
+  // Error message
+  // If user is a game master:
+  // get user with playerId:
 
-        // Add player to game as a player
+  // Add player to game as a player
 
-        // Save game
-        // redirect
-      
+  // Save game
+  // redirect
+
   // const game = new Game({
   //   name: name,
   //   description: description,
@@ -99,7 +100,7 @@ exports.postAddPlayerToGame = (req, res, next) => {
   // game
   //   .save()
   //   .then((result) => {
-  //     res.redirect("/games/all-games");
+  //     res.redirect("/games/all");
   //   })
   //   .catch((err) => {
   //     const error = new Error(err);
@@ -117,17 +118,17 @@ exports.getEditGame = (req, res, next) => {
   Game.findById(gameId)
     .then((game) => {
       if (!game) {
-        return res.redirect("/games/all-games");
+        return res.redirect("/games/all");
       }
 
       // TODO: check to see if the user is a game master, if not, error and redirect
       // if (user._id.toString() not in game.gameMasters) {
-      //   return res.redirect("/games/all-games");
+      //   return res.redirect("/games/all");
       // }
 
-      res.render("game/edit-game", {
+      res.render("game/edit", {
         title: "Edit Game",
-        path: "/game/edit-game",
+        path: "/game/edit",
         editing: editMode,
         game: game,
         hasError: false,
@@ -152,9 +153,9 @@ exports.postEditGame = (req, res, next) => {
   const errors = validationResult(req);
 
   if (!errors.isEmpty()) {
-    return res.status(422).render("game/edit-game", {
+    return res.status(422).render("game/edit", {
       title: "Edit Game",
-      path: "/game/edit-game",
+      path: "/game/edit",
       editing: true,
       hasError: true,
       game: {
@@ -181,7 +182,7 @@ exports.postEditGame = (req, res, next) => {
       game.status = updatedStatus;
 
       return game.save().then((result) => {
-        res.redirect("/games/all-games");
+        res.redirect("/games/all");
       });
     })
     .catch((err) => {
@@ -204,7 +205,7 @@ exports.postDeleteGame = (req, res, next) => {
       return Game.deleteOne({ _id: gameId, gameMaster: req.user._id });
     })
     .then(() => {
-      res.redirect("/games/all-games");
+      res.redirect("/games/all");
     })
     .catch((err) => {
       const error = new Error(err);
