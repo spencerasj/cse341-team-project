@@ -18,7 +18,7 @@
 
         <form
           method="POST"
-          action="/game/<% if (editing) { %>edit-game<% } else { %>add-game<% } %>"
+          action="/game/<% if (editing) { %>edit<% } else { %>add<% } %>"
           enctype="multipart/form-data"
         >
           <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
@@ -77,7 +77,7 @@
         </form>
 
         <% if (editing) { %>
-        <form action="/game/delete-game" method="POST">
+        <form action="/game/delete" method="POST">
           <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
           <input type="hidden" name="gameId" value="<%= game._id %>" />
 
