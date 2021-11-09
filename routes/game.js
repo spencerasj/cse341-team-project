@@ -5,11 +5,11 @@ const isAuth = require("../middleware/is-auth");
 
 const router = express.Router();
 
-router.get("/all-games", isAuth, gameController.getAllGames);
+router.get("/all", isAuth, gameController.getAllGames);
 
-router.get("/add-game", isAuth, gameController.getAddGame);
+router.get("/add", isAuth, gameController.getAddGame);
 router.post(
-  "/add-game",
+  "/add",
   // validation middleware will go here. examples:
   // [
   //   body("title")
@@ -28,9 +28,9 @@ router.post(
   isAuth,
   gameController.postAddGame
 );
-router.get("/edit-game/:gameId", isAuth, gameController.getEditGame);
+router.get("/edit/:gameId", isAuth, gameController.getEditGame);
 router.post(
-  "/edit-game",
+  "/edit",
   // validation middleware will go here. examples:
   // [
   //   body("title")
@@ -49,6 +49,6 @@ router.post(
   isAuth,
   gameController.postEditGame
 );
-router.post("/delete-game", isAuth, gameController.postDeleteGame);
+router.post("/delete", isAuth, gameController.postDeleteGame);
 
 module.exports = router;
