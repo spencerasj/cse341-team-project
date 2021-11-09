@@ -6,6 +6,7 @@ const session = require("express-session");
 const MongoDBStore = require("connect-mongodb-session")(session);
 const csrf = require("csurf");
 const flash = require("connect-flash");
+const cors = require("cors");
 
 const MONGODB_URI = process.env.MONGODB_URI;
 const PORT = process.env.PORT || 5000; // So we can run on heroku || (OR) localhost:5000
@@ -21,7 +22,13 @@ const store = new MongoDBStore({
 
 const csrfProtection = csrf({});
 
+const corsOptions = {
+  origin: "https://serene-atoll-95168.herokuapp.com/",
+  optionsSuccessStatus: 200,
+};
+
 app
+  .use(cors(corsOptions))
   .use(express.static(path.join(__dirname, "public")))
   .use(
     session({
