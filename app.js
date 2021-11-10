@@ -23,7 +23,7 @@ const store = new MongoDBStore({
 const csrfProtection = csrf({});
 
 const corsOptions = {
-  origin: "https://serene-atoll-95168.herokuapp.com/",
+  origin: "https://beat-that.herokuapp.com/",
   optionsSuccessStatus: 200,
 };
 
