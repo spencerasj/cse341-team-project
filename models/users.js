@@ -3,8 +3,8 @@ const mongoose = require('mongoose'); //Schema setup in use, mongoose must be in
 const Schema = mongoose.Schema;
 
 //Strings made more sense in this context than Char arrays, since strings are Char arrays
-//mongoose also doesn't suppoet char arrays (see https://mongoosejs.com/docs/guide.html )
-const userSchema = new Schema({
+//mongoose also doesn't support char arrays (see https://mongoosejs.com/docs/guide.html )
+const usersSchema = new Schema({
     name: { 
         type: String, 
         required: true
@@ -42,4 +42,4 @@ const userSchema = new Schema({
     }
 });
 
-module.exports = mongoose.model('User', userSchema);
+module.exports = mongoose.model('Users', usersSchema);
