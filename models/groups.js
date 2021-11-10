@@ -2,14 +2,20 @@ const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
 
-const groupSchema = new Schema({
-    teamName: {
+const groupsSchema = new Schema({
+    name: {
         type: String,
         required: true
     },
+    games: [ 
+        {
+            type: Schema.Types.ObjectId,
+            required: true,
+            ref: 'Game'
+        }
+    ],
     players: [
         {
-            name: { type: String, required: true },
             userId: {
                 type: Schema.Types.ObjectId,
                 required: true,
@@ -19,4 +25,4 @@ const groupSchema = new Schema({
     ]
 });
 
-module.exports = mongoose.model('Groups', groupSchema);
+module.exports = mongoose.model('Groups', groupsSchema);
