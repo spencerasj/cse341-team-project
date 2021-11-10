@@ -2,10 +2,12 @@ const path = require("path");
 const express = require("express");
 require("dotenv").config();
 const mongoose = require("mongoose");
+
 const session = require("express-session");
 const MongoDBStore = require("connect-mongodb-session")(session);
 const csrf = require("csurf");
 const flash = require("connect-flash");
+
 const cors = require("cors");
 
 const MONGODB_URI = process.env.MONGODB_URI;
@@ -60,8 +62,21 @@ app
   .use("/game", gameRoutes)
   .set("view engine", "ejs");
 
+const corsOptions = {
+  origin: "https://git.heroku.com/beat-that.git",
+  optionsSuccessStatus: 200,
+};
+
+app.use(cors(corsOptions));
+
+const options = {
+  useUnifiedTopology: true,
+  useNewUrlParser: true,
+  family: 4,
+};
+
 mongoose
-  .connect(MONGODB_URI)
+  .connect(MONGODB_URL)
   .then((result) => {
     app.listen(PORT, () => console.log(`Listening on ${PORT}`));
   })
