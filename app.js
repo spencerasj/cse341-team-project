@@ -62,13 +62,6 @@ app
   .use("/game", gameRoutes)
   .set("view engine", "ejs");
 
-const corsOptions = {
-  origin: "https://git.heroku.com/beat-that.git",
-  optionsSuccessStatus: 200,
-};
-
-app.use(cors(corsOptions));
-
 const options = {
   useUnifiedTopology: true,
   useNewUrlParser: true,
@@ -76,7 +69,7 @@ const options = {
 };
 
 mongoose
-  .connect(MONGODB_URL)
+  .connect(MONGODB_URI)
   .then((result) => {
     app.listen(PORT, () => console.log(`Listening on ${PORT}`));
   })
