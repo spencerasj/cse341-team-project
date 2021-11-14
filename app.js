@@ -12,9 +12,8 @@ const cors = require("cors");
 
 const MONGODB_URI = process.env.MONGODB_URI;
 const PORT = process.env.PORT || 5000; // So we can run on heroku || (OR) localhost:5000
+const routes = require('./routes');
 
-const authRoutes = require("./routes/auth");
-const gameRoutes = require("./routes/game");
 
 const app = express();
 const store = new MongoDBStore({
@@ -58,8 +57,8 @@ app
     res.locals.csrfToken = req.csrfToken();
     next();
   })
-  .use(authRoutes)
-  .use("/game", gameRoutes)
+  .use('/', routes)
+  
   .set("view engine", "ejs");
 
 const options = {

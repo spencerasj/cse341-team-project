@@ -1,14 +1,15 @@
 const { validationResult } = require("express-validator");
 const Game = require("../models/game");
-
+console.log('inside game controller');
 exports.getAllGames = (req, res, next) => {
   // TODO: Need to make this filter all games where the user is a player
-
+  console.log('get all games');
   Game.find()
     // Game.find({ players: req.user._id })
     // .select('')
     // .populate('userId')
     .then((games) => {
+      console.log('Render games');
       res.render("game/all", {
         title: "List of Games",
         path: "/games/all",
