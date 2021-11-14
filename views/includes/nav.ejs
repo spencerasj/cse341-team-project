@@ -1,3 +1,30 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">Navbar</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link <%= path === '/' ? 'active' : ''%>" aria-current="page" href="/">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link <%= path === '/games/all' ? 'active' : ''%>" href="/game/all">All Games</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link <%= path === '/game/add' ? 'active' : ''%>" href="/game/add" tabindex="-1">Add Game</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link <%= path === '/login' ? 'active' : ''%>" href="/auth/login" tabindex="-1">Login</a>
+            </li>
+          </ul>
+          
+        </div>
+      </div>
+
+</nav>
+<!-- 
 <% if (path === '/') { %>
 <a href="/" class="active"> Home </a>
 <% } else { %>
@@ -12,7 +39,7 @@
 <a href="/game/add"> Add Game </a>
 <% } %>
 
-<!-- 
+
 - <% if (path === '/game/edit') { %>
 <a href="/game/edit" class="active"> Edit Game </a>
 <% } else { %>
