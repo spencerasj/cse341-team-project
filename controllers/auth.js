@@ -327,3 +327,40 @@ exports.postNewPassword = (req, res, next) => {
       return next(error);
     });
 };
+
+exports.getCreateUser = (req, res, next) => {
+  let errorMessage = req.flash("error");
+  if (errorMessage.length > 0) {
+    errorMessage = errorMessage[0];
+  } else {
+    errorMessage = null;
+  }
+
+  res.render("/user/create-user", {
+    path: "/user/create-user",
+    title: "Create User",
+    errorMessage: errorMessage,
+    successMessage: ""
+  });
+};
+
+exports.postCreateUser = (req, res, next) => {
+  const password = req.body.password;
+  const userId = req.body.userId;
+  const passwordToken = req.body.passwordToken;
+
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    console.log(errors.array());
+
+    res.status(422).render("/user/create-user", {
+      path: "/user/create-user",
+      title: "Create User",
+      errorMessage: errors.array()[0].msg,
+      userId: userId.toString(),
+      passwordToken: passwordToken,
+      validationErrors: errors.array(),
+    });
+  }
+  
+};
