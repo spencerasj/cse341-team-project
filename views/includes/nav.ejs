@@ -22,6 +22,7 @@
             >Home</a
           >
         </li>
+        <% if (isAuthenticated) { %>
         <li class="nav-item">
           <a
             class="nav-link <%= path === '/games/all' ? 'active' : ''%>"
@@ -37,7 +38,7 @@
             >Add Game</a
           >
         </li>
-        <% if (!isAuthenticated) { %>
+        <% } %> <% if (!isAuthenticated) { %>
         <li class="nav-item">
           <a
             class="nav-link <%= path === '/login' ? 'active' : ''%>"
