@@ -12,6 +12,21 @@
       <div>
         <h1><%= title %></h1>
 
+        <% if (errorMessage) { %>
+        <div>
+          <div>
+            <div>
+              <h3>There was an error:</h3>
+              <div>
+                <ul role="list">
+                  <li><%= errorMessage %></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <% } %>
+
         <form
           method="POST"
           action="/game/<% if (editing) { %>edit<% } else { %>add<% } %>"
