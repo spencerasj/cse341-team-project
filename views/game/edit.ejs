@@ -15,7 +15,6 @@
         <form
           method="POST"
           action="/game/<% if (editing) { %>edit<% } else { %>add<% } %>"
-          enctype="multipart/form-data"
         >
           <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
           <div class="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-3">
