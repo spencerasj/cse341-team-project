@@ -1,15 +1,22 @@
 const path = require("path");
 const express = require("express");
 const bodyParser = require("body-parser");
-require("dotenv").config();
 const mongoose = require("mongoose");
-
 const session = require("express-session");
 const MongoDBStore = require("connect-mongodb-session")(session);
+
 const csrf = require("csurf");
+const csrfProtection = csrf({});
+
 const flash = require("connect-flash");
+const dotenv = require("dotenv");
+dotenv.config();
 
 const cors = require("cors");
+const corsOptions = {
+  origin: "https://beat-that.herokuapp.com/",
+  optionsSuccessStatus: 200,
+};
 
 const MONGODB_URI = process.env.MONGODB_URI;
 const PORT = process.env.PORT || 5000; // So we can run on heroku || (OR) localhost:5000
@@ -23,14 +30,8 @@ const store = new MongoDBStore({
   collection: "sessions",
 });
 
-const csrfProtection = csrf({});
-
-const corsOptions = {
-  origin: "https://beat-that.herokuapp.com/",
-  optionsSuccessStatus: 200,
-};
-
 app
+  .set("view engine", "ejs")
   .use(bodyParser.urlencoded({ extended: false }))
   .use(cors(corsOptions))
   .use(express.static(path.join(__dirname, "public")))
@@ -50,6 +51,7 @@ app
     }
     User.findById(req.session.user._id)
       .then((user) => {
+        console.log("we have a logged in user " + user._id);
         req.user = user;
         next();
       })
@@ -60,9 +62,7 @@ app
     res.locals.csrfToken = req.csrfToken();
     next();
   })
-  .use("/", routes)
-
-  .set("view engine", "ejs");
+  .use("/", routes);
 
 const mongooseOptions = {
   useUnifiedTopology: true,
