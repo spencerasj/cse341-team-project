@@ -1,5 +1,5 @@
 const express = require("express");
-// const { body } = require("express-validator");
+const { body } = require("express-validator");
 const gameController = require("../controllers/game");
 const isAuth = require("../middleware/is-auth");
 
@@ -10,21 +10,17 @@ router.get("/all", isAuth, gameController.getAllGames);
 router.get("/add", isAuth, gameController.getAddGame);
 router.post(
   "/add",
-  // validation middleware will go here. examples:
-  // [
-  //   body("title")
-  //     .isString()
-  //     .isLength({ min: 3 })
-  //     .trim()
-  //     .withMessage("the title must be at least 3 characters long"),
-  //   body("price")
-  //     .isFloat()
-  //     .withMessage("The price was not valid. Please try again."),
-  //   body("description")
-  //     .isLength({ min: 5, max: 400 })
-  //     .trim()
-  //     .withMessage("The description must be between 5 and 400 characters."),
-  // ],
+  [
+    body("name")
+      .isString()
+      .trim()
+      .isLength({ min: 3 })
+      .withMessage("the game name must be at least 3 characters long"),
+    body("description")
+      .trim()
+      .isLength({ min: 5, max: 400 })
+      .withMessage("The description must be between 5 and 400 characters."),
+  ],
   isAuth,
   gameController.postAddGame
 );
