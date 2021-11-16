@@ -178,7 +178,7 @@ exports.postSignUp = (req, res, next) => {
           res.redirect("/auth/login");
           return transporter.sendMail({
             to: email,
-            from: "matt@steeleagency.com",
+            from: process.env.FROM_EMAIL,
             subject: "Sign Up Successful",
             html: "<h1>You successfully signed up!</h1>",
           });
@@ -228,7 +228,7 @@ exports.postReset = (req, res, next) => {
         res.redirect("/");
         transporter.sendMail({
           to: req.body.email,
-          from: "matt@steeleagency.com",
+          from: process.env.FROM_EMAIL,
           subject: "Password Reset",
           html: `
           <p>You requested a password reset</p>
@@ -315,7 +315,7 @@ exports.postNewPassword = (req, res, next) => {
       res.redirect("/login");
       transporter.sendMail({
         to: user.email,
-        from: "matt@steeleagency.com",
+        from: process.env.FROM_EMAIL,
         subject: "Password Reset Confirmation",
         html: `
         <p>Your password has been changed</p>`,
