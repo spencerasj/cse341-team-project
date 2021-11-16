@@ -22,18 +22,10 @@ exports.getLogin = (req, res, next) => {
     errorMessage = null;
   }
 
-  let successMessage = req.flash("success");
-  if (successMessage.length > 0) {
-    successMessage = successMessage[0];
-  } else {
-    successMessage = null;
-  }
-
   res.render("auth/login", {
     path: "/login",
     title: "Login",
     errorMessage: errorMessage,
-    successMessage: successMessage,
     oldInput: { email: "", password: "" },
     validationErrors: [],
   });
@@ -49,7 +41,6 @@ exports.postLogin = (req, res, next) => {
       path: "/login",
       title: "Login",
       errorMessage: errors.array()[0].msg,
-      successMessage: null,
       validationErrors: errors.array(),
     });
   }
@@ -61,7 +52,6 @@ exports.postLogin = (req, res, next) => {
           path: "/login",
           title: "Login",
           errorMessage: "Invalid email or password.",
-          successMessage: "",
           oldInput: {
             email: email,
             password: password,
@@ -85,7 +75,6 @@ exports.postLogin = (req, res, next) => {
             path: "/login",
             title: "Login",
             errorMessage: "Invalid email or password.",
-            successMessage: "",
             oldInput: {
               email: email,
               password: password,
@@ -106,8 +95,7 @@ exports.postLogin = (req, res, next) => {
 };
 
 exports.postLogout = (req, res, next) => {
-  req.session.destroy((err) => {
-    console.log(err);
+  req.session.destroy(() => {
     res.redirect("/");
   });
 };
@@ -340,7 +328,6 @@ exports.getCreateUser = (req, res, next) => {
     path: "/user/create-user",
     title: "Create User",
     errorMessage: errorMessage,
-    successMessage: "",
   });
 };
 
