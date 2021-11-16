@@ -144,7 +144,6 @@ exports.getEditGame = (req, res, next) => {
 };
 
 exports.postEditGame = (req, res, next) => {
-  console.log("hit the postEditGame route");
   const gameId = req.body.gameId;
   const updatedName = req.body.name;
   const updatedDescription = req.body.description;
@@ -174,9 +173,9 @@ exports.postEditGame = (req, res, next) => {
   Game.findById(gameId)
     .then((game) => {
       // TODO: Check to see if the logged in user is a game master
-      if (game.gameMaster.userId.toString() !== req.user._id.toString()) {
-        return res.redirect("/");
-      }
+      // if (game.gameMaster.userId.toString() !== req.user._id.toString()) {
+      //   return res.redirect("/");
+      // }
       // TODO: update the object data with the form submission data
       game.name = updatedName;
       game.description = updatedDescription;
