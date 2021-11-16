@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    
     <title><%= title %></title>
     <%- include('../includes/head.ejs') %>
   </head>
@@ -43,7 +42,7 @@
               <label for="description"> Description </label>
               <div>
                 <textarea required id="description" name="description" rows="3">
-                        <% if (editing || hasError) { %><%= game.description %><% } %></textarea
+<% if (editing || hasError) { %><%= game.description %><% } %></textarea
                 >
               </div>
             </div>
