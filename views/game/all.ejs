@@ -23,10 +23,11 @@
       <ul>
         <% for (let game of games) { %>
         <li>
-          <%= game.title %>
+          <span style="font-weight: bold"><%= game.name %></span>
 
           <span> <%= game.description %> </span>
-          <span> <%= game.status %> </span>
+          <span> status: <%= game.status %> </span>
+          <a href="/game/edit/<%= game._id %>">Edit</a>
         </li>
         <% } %>
       </ul>
