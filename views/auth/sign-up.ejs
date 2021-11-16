@@ -6,7 +6,7 @@
 
     <main>
       <div>
-        <% if (successMessage) { %>
+    <% if (errorMessage) { %>
         <div>
           <div>
   
@@ -62,13 +62,13 @@
               </div>
 
               <div>
-                <label for="confirm-password"> Confirm Password </label>
+                <label for="confirmPassword"> Confirm Password </label>
                 <div>
                   <input
-                    id="confirm-password"
-                    name="confirm-password"
+                    id="confirmPassword"
+                    name="confirmPassword"
                     type="password"
-                    autocomplete="confirm-password"
+                    autocomplete="confirmPassword"
                     required
                   />
                 </div>
