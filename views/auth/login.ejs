@@ -40,13 +40,13 @@
           <h2>Sign in to your account</h2>
           <p>
             Or
-            <a href="/sign-up"> sign up now </a>
+            <a href="/auth/sign-up"> sign up now </a>
           </p>
         </div>
 
         <div>
           <div>
-            <form action="/login" method="POST">
+            <form action="/auth/login" method="POST">
               <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
 
               <div>

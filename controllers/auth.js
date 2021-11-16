@@ -120,7 +120,7 @@ exports.getSignUp = (req, res, next) => {
     message = null;
   }
 
-  res.render("auth/signup", {
+  res.render("auth/sign-up", {
     path: "/sign-up",
     title: "Sign Up",
     errorMessage: message,
@@ -143,7 +143,7 @@ exports.postSignUp = (req, res, next) => {
 
   if (!errors.isEmpty()) {
     console.log(errors.array());
-    return res.status(422).render("auth/signup", {
+    return res.status(422).render("auth/sign-up", {
       path: "/sign-up",
       title: "Sign Up",
       errorMessage: errors.array()[0].msg,
@@ -175,7 +175,7 @@ exports.postSignUp = (req, res, next) => {
           );
         })
         .then((result) => {
-          res.redirect("/login");
+          res.redirect("/auth/login");
           return transporter.sendMail({
             to: email,
             from: "matt@steeleagency.com",
@@ -340,7 +340,7 @@ exports.getCreateUser = (req, res, next) => {
     path: "/user/create-user",
     title: "Create User",
     errorMessage: errorMessage,
-    successMessage: ""
+    successMessage: "",
   });
 };
 
@@ -362,5 +362,4 @@ exports.postCreateUser = (req, res, next) => {
       validationErrors: errors.array(),
     });
   }
-  
 };
