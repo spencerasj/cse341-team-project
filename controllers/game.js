@@ -1,6 +1,8 @@
 const { validationResult } = require("express-validator");
 const Game = require("../models/game");
+
 console.log("inside game controller");
+
 exports.getAllGames = (req, res, next) => {
   // TODO: Need to make this filter all games where the user is a player
   console.log("get all games");
