@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    
     <title><%= title %></title>
 
     <%- include('../includes/head.ejs') %>
@@ -18,6 +17,8 @@
         </p>
         <% } %>
       </div>
+
+      <h2>Welcome <%= user.email %></h2>
 
       <ul>
         <% for (let game of games) { %>
