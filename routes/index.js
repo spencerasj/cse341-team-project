@@ -1,14 +1,7 @@
 const routes = require("express").Router();
-//const nodePages = require('./nodeRoutes');
-//const provePages = require('./proveRoutes');
-//const teamPages = require('./teamRoutes');
-//const shopPages = require('./shopRoutes');
-//const adminPages = require('./adminRoutes'); // So we can run on heroku || (OR) localhost:5000
 const authRoutes = require("./auth");
 const gameRoutes = require("./game");
-//const authPages = require('./authRoutes');
 const errorController = require("../controllers/error");
-//const ta01Routes = require('./teamRoutes/ta01');
 
 routes
   .use("/game", gameRoutes)
