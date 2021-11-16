@@ -11,18 +11,9 @@ const errorController = require("../controllers/error");
 //const ta01Routes = require('./teamRoutes/ta01');
 
 routes
-  //.use('/node', nodePages)
-  //.use('/prove', provePages)
-  //.use('/shopPages', shopPages)
-  //.use('/adminPages', adminPages)
-  //.use('/teamPages', teamPages)
   .use("/game", gameRoutes)
   .use("/auth", authRoutes)
-
   .get("/", (req, res, next) => {
-    // This is the primary index, always handled last.
-    console.log("inside of index.js");
-
     res.render("index", {
       title: "WELCOME to Beat That! ",
       path: "/index",
