@@ -51,7 +51,6 @@ app
     }
     User.findById(req.session.user._id)
       .then((user) => {
-        console.log("we have a logged in user " + user._id);
         req.user = user;
         next();
       })
