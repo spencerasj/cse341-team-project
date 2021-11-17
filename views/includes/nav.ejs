@@ -1,6 +1,6 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">Beat That!</a>
+    <a class="navbar-brand" href="#"></a>
     <button
       class="navbar-toggler"
       type="button"
@@ -38,7 +38,16 @@
             >Add Game</a
           >
         </li>
-        <% } %> <% if (!isAuthenticated) { %>
+        <% } %> 
+         <li class="nav-item">
+          <a
+            class="nav-link <%= path === '/login' ? 'active' : ''%>"
+            href="/auth/signup"
+            tabindex="-1"
+            >Sign Up</a
+          >
+        </li>
+        <% if (!isAuthenticated) { %>
         <li class="nav-item">
           <a
             class="nav-link <%= path === '/login' ? 'active' : ''%>"

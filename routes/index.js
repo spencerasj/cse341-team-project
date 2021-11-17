@@ -1,4 +1,5 @@
 const routes = require("express").Router();
+
 const authRoutes = require("./auth");
 const gameRoutes = require("./game");
 const errorController = require("../controllers/error");
