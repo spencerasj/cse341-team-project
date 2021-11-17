@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    
     <title><%= title %></title>
 
     <%- include('../includes/head.ejs') %>
@@ -19,13 +18,16 @@
         <% } %>
       </div>
 
+      <h2>Welcome <%= user.name %></h2>
+
       <ul>
         <% for (let game of games) { %>
         <li>
-          <%= game.title %>
+          <span style="font-weight: bold"><%= game.name %></span>
 
           <span> <%= game.description %> </span>
-          <span> <%= game.status %> </span>
+          <span> status: <%= game.status %> </span>
+          <a href="/game/edit/<%= game._id %>?edit=true">Edit</a>
         </li>
         <% } %>
       </ul>
