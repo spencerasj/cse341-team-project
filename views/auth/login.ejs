@@ -1,4 +1,5 @@
     <%- include('../includes/head.ejs') %>
+    <link rel="stylesheet" href="/css/forms.css">
   </head>
 
   <body>
@@ -21,12 +22,12 @@
         </div>
         <% } %>
 
-        <div class="sign-up-div">
+        <div class="login-div">
           <div>
-          <h2>Sign in to your account</h2>
+          <h2>Log in to your account</h2>
           <p>
             Or
-            <a href="/auth/sign-up"> sign up now </a>
+            <a href="/auth/sign-up"> Sign up now </a>
           </p>
           </div>
 
@@ -34,10 +35,11 @@
             <form action="/auth/login" method="POST">
               <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
 
-              <div>
-                <label for="email"> Email address </label>
+              <div class="mb-3">
+                <label class="form-label" for="email"> Email address </label>
                 <div>
                   <input
+                  class="form-control"
                     id="email"
                     name="email"
                     type="email"
@@ -47,10 +49,11 @@
                 </div>
               </div>
 
-              <div>
-                <label for="password"> Password </label>
-                <div>
+              <div class="mb-3">
+                <label class="form-label" for="password"> Password </label>
+                <div >
                   <input
+                  class="form-control"
                     id="password"
                     name="password"
                     type="password"
@@ -60,11 +63,11 @@
                 </div>
               </div>
 
+              <!-- <div> -->
+                <button class="btn btn-primary" type="submit">Login</button>
+              <!-- </div> -->
               <div>
-                <button type="submit">Sign in</button>
-              </div>
-              <div>
-                <div class="text-sm">
+                <div class="text-sm mb-3 mt-3">
                   <a href="/reset"> Forgot your password? </a>
                 </div>
               </div>

@@ -58,8 +58,23 @@ li {
   justify-content: center;
   align-items: center;
 }
-.login-page .sign-up-div {
+.login-page,
+.signup-page {
   margin: 2rem;
+}
+.login-div h2,
+.signup-div h2 {
+  font-size: 3em;
+  line-height: 0.75;
+}
+.login-page a,
+.signup-page a {
+  color: #046865;
+}
+.login-page .btn-primary,
+.signup-page .btn-primary {
+  background-color: #046865;
+  border-color: #046865;
 }
 .main-404 {
   background-image: url(../images/404-small.jpg);
