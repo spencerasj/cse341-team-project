@@ -39,18 +39,20 @@
           >
         </li>
         <% } %>
+
+        <% if (!isAuthenticated) { %>
+
         <li class="nav-item">
           <a
-            class="nav-link <%= path === '/login' ? 'active' : ''%>"
-            href="/auth/signup"
+            class="nav-link <%= path === '/auth/sign-up' ? 'active' : ''%>"
+            href="/auth/sign-up"
             tabindex="-1"
             >Sign Up</a
           >
         </li>
-        <% if (!isAuthenticated) { %>
         <li class="nav-item">
           <a
-            class="nav-link <%= path === '/login' ? 'active' : ''%>"
+            class="nav-link <%= path === '/auth/login' ? 'active' : ''%>"
             href="/auth/login"
             tabindex="-1"
             >Login</a
@@ -60,7 +62,7 @@
         <li class="nav-item">
           <form action="/auth/logout" method="POST">
             <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
-            <button>Logout</button>
+            <button >Logout</button>
           </form>
         </li>
         <% } %>

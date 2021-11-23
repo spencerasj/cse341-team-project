@@ -1,5 +1,8 @@
+
 <%- include('../includes/head.ejs') %>
 <link rel="stylesheet" href="/css/forms.css">
+  <title><%= title %></title>
+
   </head>
 
   <body>
@@ -7,12 +10,12 @@
 
     <main class="signup-page">
       <div>
-    <% if (errorMessage) { %>
+        <% if (errorMessage) { %>
         <div>
           <div>
-  
             <div class="error-message">
               <h3 class="error-title">There was an error in sign-up</h3>
+
               <div>
                 <ul class="error-list" role="list">
                   <li><%= errorMessage %></li>
@@ -27,7 +30,7 @@
           <h2>Sign up</h2>
           <p>
             Or
-            <a href="/login"> Already have an account?</a>
+            <a href="/auth/login"> Already have an account?</a>
           </p>
         </div>
 
