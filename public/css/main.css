@@ -22,7 +22,8 @@ h6 {
 }
 
 p,
-a {
+a,
+li {
   font-family: "Poppins", sans-serif;
 }
 
@@ -37,23 +38,35 @@ a {
   background-image: url("../images/mario.jpg");
   background-position-x: -50px;
   background-position-y: 25%;
-  height: 35vh;
   background-size: cover;
   align-items: center;
 }
+
 .title h1 {
-  margin: 2rem auto;
   text-align: right;
   color: white;
-  font-size: 8em;
-  padding-right: 1em;
+  font-size: 12.5vw;
+  padding: 5% 10% 10% 50%;
 }
+.game-info {
+  margin: 0 auto;
+}
+/* i {
+  color: #046865;
+} */
 .all-games-page {
   justify-content: center;
   align-items: center;
 }
 .login-page .sign-up-div {
   margin: 2rem;
+}
+.main-404 {
+  background-image: url(../images/404-small.jpg);
+  background-size: cover;
+  height: 100vh;
+  overflow: hidden;
+  /* background-position-x: 50%; */
 }
 footer {
   background-color: #d7263d;
@@ -62,4 +75,21 @@ footer {
 }
 footer p {
   padding: 2em;
+}
+@media (min-width: 550px) {
+  .main-404 {
+    background-image: url("../images/404.jpg");
+  }
+}
+
+@media (min-width: 600px) {
+  title {
+    height: 35vh;
+  }
+  /* .title h1 {
+    /* margin: 2rem auto; */
+  /* text-align: right;
+    color: white;
+    font-size: 12.5vw;
+    padding: 5% 10% 10% 50%; } */
 }
