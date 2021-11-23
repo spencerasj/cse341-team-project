@@ -9,7 +9,7 @@ body {
 
 main {
   padding: 0;
-  margin: auto;
+  margin: 2rem;
   height: 100vh;
 }
 h1,
@@ -48,20 +48,35 @@ li {
   font-size: 12.5vw;
   padding: 5% 10% 10% 50%;
 }
+.error-message {
+  padding: 1rem;
+  margin-bottom: 2rem;
+  border: 2px solid #ffe900;
+}
+.error-title {
+  font-size: 1em;
+  font-family: "Poppins", sans-serif;
+  text-align: center;
+  color: #d7263d;
+}
+.error-list {
+  list-style-type: none;
+  font-size: 1em;
+  padding: 0;
+  margin: 0;
+}
 .game-info {
   margin: 0 auto;
 }
-/* i {
-  color: #046865;
-} */
+
 .all-games-page {
   justify-content: center;
   align-items: center;
 }
-.login-page,
+/* .login-page,
 .signup-page {
   margin: 2rem;
-}
+} */
 .login-div h2,
 .signup-div h2 {
   font-size: 3em;
@@ -71,11 +86,7 @@ li {
 .signup-page a {
   color: #046865;
 }
-.login-page .btn-primary,
-.signup-page .btn-primary {
-  background-color: #046865;
-  border-color: #046865;
-}
+
 .main-404 {
   background-image: url(../images/404-small.jpg);
   background-size: cover;
