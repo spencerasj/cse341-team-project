@@ -1,4 +1,6 @@
-<%- include('./includes/head.ejs') %>
+  <%- include('../includes/head.ejs') %> 
+  <title><%= title %></title>
+
   </head>
 
   <body>
@@ -6,10 +8,9 @@
 
     <main class="signup-page">
       <div>
-    <% if (errorMessage) { %>
+        <% if (errorMessage) { %>
         <div>
           <div>
-  
             <div>
               <h3>There was an error in sign-up</h3>
               <div>
@@ -26,7 +27,7 @@
           <h2>Sign up</h2>
           <p>
             Or
-            <a href="/login"> Already have an account?</a>
+            <a href="/auth/login"> Already have an account?</a>
           </p>
         </div>
 
