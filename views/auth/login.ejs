@@ -1,6 +1,7 @@
-  <%- include('../includes/head.ejs') %>
-  <title><%= title %></title>
 
+    <%- include('../includes/head.ejs') %>
+    <link rel="stylesheet" href="/css/forms.css">
+  <title><%= title %></title>
   </head>
 
   <body>
@@ -11,10 +12,10 @@
         <% if (errorMessage) { %>
         <div>
           <div>
-            <div>
-              <h3>There was an error logging in</h3>
+            <div class="error-message">
+              <h3 class="error-title">THERE WAS AN ERROR LOGGING IN</h3>
               <div>
-                <ul role="list">
+                <ul class="error-list" role="list">
                   <li><%= errorMessage %></li>
                 </ul>
               </div>
@@ -23,12 +24,12 @@
         </div>
         <% } %>
 
-        <div class="sign-up-div">
+        <div class="login-div">
           <div>
-          <h2>Sign in to your account</h2>
+          <h2>Log in to your account</h2>
           <p>
             Or
-            <a href="/auth/sign-up"> sign up now </a>
+            <a href="/auth/sign-up"> Sign up now </a>
           </p>
           </div>
 
@@ -36,10 +37,11 @@
             <form action="/auth/login" method="POST">
               <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
 
-              <div>
-                <label for="email"> Email address </label>
+              <div class="mb-3">
+                <label class="form-label" for="email"> Email address </label>
                 <div>
                   <input
+                  class="form-control"
                     id="email"
                     name="email"
                     type="email"
@@ -49,10 +51,11 @@
                 </div>
               </div>
 
-              <div>
-                <label for="password"> Password </label>
-                <div>
+              <div class="mb-3">
+                <label class="form-label" for="password"> Password </label>
+                <div >
                   <input
+                  class="form-control"
                     id="password"
                     name="password"
                     type="password"
@@ -62,7 +65,11 @@
                 </div>
               </div>
 
+              <!-- <div> -->
+                <button class="btn btn-primary" type="submit">Login</button>
+              <!-- </div> -->
               <div>
+
                 <button type="submit">Sign in</button>
               </div>
               <div>
