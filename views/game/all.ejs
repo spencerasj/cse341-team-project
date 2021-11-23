@@ -1,21 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title><%= title %></title>
-
     <%- include('../includes/head.ejs') %>
   </head>
 
   <body>
     <%- include('../includes/nav.ejs') %>
 
-    <main>
+    <main class="all-games-page">
       <div>
         <% if (games.length > 0) { %>
         <p class="text-center text-gray-600 mt-2">
           Click a game to edit or delete.
         </p>
         <% } %>
+        
       </div>
 
       <h2>Welcome <%= user.name %></h2>
