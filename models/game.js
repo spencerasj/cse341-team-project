@@ -9,10 +9,10 @@ const Schema = mongoose.Schema;
 // end time
 
 const gameSchema = new Schema({
-  accessToken: {
-    type: String,
-    required: true,
-  },
+  // accessToken: {
+  //   type: String,
+  //   required: true,
+  // },
   name: {
     type: String,
     required: true,

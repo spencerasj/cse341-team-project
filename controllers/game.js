@@ -1,19 +1,18 @@
 const { validationResult } = require("express-validator");
 const Game = require("../models/game");
-console.log('inside game controller');
+
 exports.getAllGames = (req, res, next) => {
   // TODO: Need to make this filter all games where the user is a player
-  console.log('get all games');
   Game.find()
     // Game.find({ players: req.user._id })
     // .select('')
     // .populate('userId')
     .then((games) => {
-      console.log('Render games');
       res.render("game/all", {
         title: "List of Games",
-        path: "/games/all",
+        path: "/game/all",
         games: games,
+        user: req.user,
       });
     })
     .catch((err) => {
@@ -42,7 +41,7 @@ exports.postAddGame = (req, res, next) => {
   const errors = validationResult(req);
 
   if (!errors.isEmpty()) {
-    // console.log(errors.array());
+    console.log(errors.array());
     return res.status(422).render("game/edit", {
       title: "Add Game",
       path: "/game/add",
@@ -69,7 +68,7 @@ exports.postAddGame = (req, res, next) => {
   game
     .save()
     .then((result) => {
-      res.redirect("/games/all");
+      res.redirect("/game/all");
     })
     .catch((err) => {
       const error = new Error(err);
@@ -119,7 +118,7 @@ exports.getEditGame = (req, res, next) => {
   Game.findById(gameId)
     .then((game) => {
       if (!game) {
-        return res.redirect("/games/all");
+        return res.redirect("/game/all");
       }
 
       // TODO: check to see if the user is a game master, if not, error and redirect
@@ -174,16 +173,16 @@ exports.postEditGame = (req, res, next) => {
   Game.findById(gameId)
     .then((game) => {
       // TODO: Check to see if the logged in user is a game master
-      if (game.gameMaster.userId.toString() !== req.user._id.toString()) {
-        return res.redirect("/");
-      }
+      // if (game.gameMaster.userId.toString() !== req.user._id.toString()) {
+      //   return res.redirect("/");
+      // }
       // TODO: update the object data with the form submission data
       game.name = updatedName;
       game.description = updatedDescription;
       game.status = updatedStatus;
 
       return game.save().then((result) => {
-        res.redirect("/games/all");
+        res.redirect("/game/all");
       });
     })
     .catch((err) => {
@@ -206,7 +205,7 @@ exports.postDeleteGame = (req, res, next) => {
       return Game.deleteOne({ _id: gameId, gameMaster: req.user._id });
     })
     .then(() => {
-      res.redirect("/games/all");
+      res.redirect("/game/all");
     })
     .catch((err) => {
       const error = new Error(err);

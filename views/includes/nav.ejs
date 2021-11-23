@@ -22,9 +22,10 @@
             >Home</a
           >
         </li>
+        <% if (isAuthenticated) { %>
         <li class="nav-item">
           <a
-            class="nav-link <%= path === '/games/all' ? 'active' : ''%>"
+            class="nav-link <%= path === '/game/all' ? 'active' : ''%>"
             href="/game/all"
             >All Games</a
           >
@@ -37,6 +38,16 @@
             >Add Game</a
           >
         </li>
+        <% } %> 
+         <li class="nav-item">
+          <a
+            class="nav-link <%= path === '/login' ? 'active' : ''%>"
+            href="/auth/signup"
+            tabindex="-1"
+            >Sign Up</a
+          >
+        </li>
+        <% if (!isAuthenticated) { %>
         <li class="nav-item">
           <a
             class="nav-link <%= path === '/login' ? 'active' : ''%>"
@@ -45,14 +56,14 @@
             >Login</a
           >
         </li>
+        <% } else { %>
         <li class="nav-item">
-          <a
-            class="nav-link <%= path === '/login' ? 'active' : ''%>"
-            href="/auth/signup"
-            tabindex="-1"
-            >Sign Up</a
-          >
+          <form action="/auth/logout" method="POST">
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+            <button>Logout</button>
+          </form>
         </li>
+        <% } %>
       </ul>
     </div>
   </div>
