@@ -34,7 +34,7 @@
                 for="title"
                 class="block text-sm font-medium text-gray-700"
               >
-                Name
+                Game Name
               </label>
               <div>
                 <input
@@ -57,42 +57,125 @@
               </div>
             </div>
 
-            <!-- <div>
-              <label for="status"> Status </label>
-              <div class="mt-1">
+
+            <h2>Highest Score Ever</h2>
+
+            <div class="sm:col-span-3">
+              <label
+                for="highestScoreEverName"
+                class="block text-sm font-medium text-gray-700"
+              >
+                Player
+              </label>
+              <div>
                 <input
                   required
-                  name="status"
-                  id="status"
                   type="text"
-                  value="<% if (editing || hasError) { %><%= game.status %><% } %>"
-                />
-              </div>
-            </div> -->
-            <div>
-              <label for="gameMaster"> Game Master Email </label>
-              <div class="mt-1">
-                <input
-                  name="gameMaster"
-                  id="gameMaster"
-                  type="email"
-                  value="<% if (editing || hasError) { %><%= game.status %><% } %>"
+                  name="highestScoreEverName"
+                  id="highestScoreEverName"
+                  value="<% if
+                  (editing || hasError) { %><%= game.highestScoreEver.name %><% } %>"
                 />
               </div>
             </div>
 
+            <div class="sm:col-span-3">
+              <label
+                for="highestScoreEverScore"
+                class="block text-sm font-medium text-gray-700"
+              >
+                Score
+              </label>
               <div>
-                <label for="player"> Player Email </label>
-                <div class="mt-1">
-                  <input
-                    name="player"
-                    id="player"
-                    type="email"
-                    value="<% if (editing || hasError) { %><%= game.status %><% } %>"
-                  />
-                </div>
+                <input
+                  required
+                  type="number"
+                  name="highestScoreEverScore"
+                  id="highestScoreEverScore"
+                  value="<% if
+                  (editing || hasError) { %><%= game.highestScoreEver.score %><% } %>"
+                />
               </div>
+            </div>
+
+            <div class="sm:col-span-3">
+              <label
+                for="highestScoreEverDate"
+                class="block text-sm font-medium text-gray-700"
+              >
+                Date
+              </label>
+              <div>
+                <input
+                  required
+                  type="text"
+                  name="highestScoreEverDate"
+                  id="highestScoreEverDate"
+                  value="<% if
+                  (editing || hasError) { %><%= game.highestScoreEver.date %><% } %>"
+                />
+              </div>
+            </div>
   
+
+            <h2>Lowest Score Ever</h2>
+
+            <div class="sm:col-span-3">
+              <label
+                for="lowestScoreEverName"
+                class="block text-sm font-medium text-gray-700"
+              >
+                Player
+              </label>
+              <div>
+                <input
+                  required
+                  type="text"
+                  name="lowestScoreEverName"
+                  id="lowestScoreEverName"
+                  value="<% if
+                  (editing || hasError) { %><%= game.lowestScoreEver.name %><% } %>"
+                />
+              </div>
+            </div>
+
+            <div class="sm:col-span-3">
+              <label
+                for="lowestScoreEverScore"
+                class="block text-sm font-medium text-gray-700"
+              >
+                Score
+              </label>
+              <div>
+                <input
+                  required
+                  type="number"
+                  name="lowestScoreEverScore"
+                  id="lowestScoreEverScore"
+                  value="<% if
+                  (editing || hasError) { %><%= game.lowestScoreEver.score %><% } %>"
+                />
+              </div>
+            </div>
+
+            <div class="sm:col-span-3">
+              <label
+                for="lowestScoreEverDate"
+                class="block text-sm font-medium text-gray-700"
+              >
+                Date
+              </label>
+              <div>
+                <input
+                  required
+                  type="text"
+                  name="lowestScoreEverDate"
+                  id="lowestScoreEverDate"
+                  value="<% if
+                  (editing || hasError) { %><%= game.lowestScoreEver.date %><% } %>"
+                />
+              </div>
+            </div>
 
             <% if (editing) { %>
             <input type="hidden" name="gameId" value="<%= game._id %>" />
@@ -114,6 +197,27 @@
           <button type="submit">Delete</button>
         </form>
         <% } %>
+
+
+        <!-- <% if (editing) { %>
+          <hr />
+          <form action="/game/<%= game._id %>/add-gamemaster" method="POST">
+
+            <div>
+              <label for="emailToAdd"> Enter an email address to add another administrator </label>
+              <div class="mt-1">
+                <input
+                name="emailToAdd"
+                id="emailToAdd"
+                type="email"
+                value=""
+                />
+              </div>
+            </div>
+            
+            <button type="submit">Add</button>
+          </form>
+          <% } %> -->
       </div>
     </main>
   </body>

@@ -3,10 +3,6 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const gameSchema = new Schema({
-  // accessToken: {
-  //   type: String,
-  //   required: true,
-  // },
   name: {
     type: String,
     required: true,
@@ -23,42 +19,33 @@ const gameSchema = new Schema({
   ],
 
   highestScoreEver: {
-    // type: Schema.Types.ObjectId,
-    // required: false,
-    // ref: "User",
-    // preformerInfo: {
     name: {
       type: String,
-      required: true,
+      // With these fields required, Editing works but Adding does not.
+      // required: true,
     },
     score: {
       type: Number,
-      required: true,
+      // required: true,
     },
     date: {
       type: Date,
-      required: true,
+      // required: true,
     },
-    // },
   },
   lowestScoreEver: {
-    // type: Schema.Types.ObjectId,
-    // required: false,
-    // ref: "User",
-    // performerInfo: {
     name: {
       type: String,
-      required: true,
+      // required: true,
     },
     score: {
       type: Number,
-      required: true,
+      // required: true,
     },
     date: {
       type: Date,
-      required: true,
+      // required: true,
     },
-    // },
   },
 });
 
