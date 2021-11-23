@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+// const User = require("../models/user");
 
 const Schema = mongoose.Schema;
 
@@ -9,10 +10,10 @@ const Schema = mongoose.Schema;
 // end time
 
 const gameSchema = new Schema({
-  accessToken: {
-    type: String,
-    required: true,
-  },
+  // accessToken: {
+  //   type: String,
+  //   required: true,
+  // },
   name: {
     type: String,
     required: true,
@@ -25,7 +26,6 @@ const gameSchema = new Schema({
       ref: "User",
     },
   ],
-  status: { type: String, required: true },
   players: [
     {
       type: Schema.Types.ObjectId,
@@ -37,11 +37,39 @@ const gameSchema = new Schema({
     type: Schema.Types.ObjectId,
     required: false,
     ref: "User",
+    preformerInfo:{
+      name: { 
+        type: String, 
+        required: true
+      },
+      score: { 
+        type: Number, 
+        required: true
+      },
+      date: { 
+        type: Date, 
+        required: true
+      }
+    }
   },
   lowPerformer: {
     type: Schema.Types.ObjectId,
     required: false,
     ref: "User",
+    preformerInfo: {
+      name: { 
+        type: String, 
+        required: true
+      },
+      score: { 
+        type: Number, 
+        required: true
+      },
+      date: { 
+        type: Date, 
+        required: true
+      }
+    }
   },
   playerScores: [
     {
@@ -57,5 +85,10 @@ const gameSchema = new Schema({
     },
   ],
 });
+
+// gameSchema.methods.addGameMasterByEmail = function(newGameMasterEmail) {
+//   User.find({ email: newGameMasterEmail})
+//     .then()
+// };
 
 module.exports = mongoose.model("Game", gameSchema);

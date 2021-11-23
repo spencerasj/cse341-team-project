@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    
     <title><%= title %></title>
     <%- include('../includes/head.ejs') %>
   </head>
@@ -13,10 +12,24 @@
       <div>
         <h1><%= title %></h1>
 
+        <% if (errorMessage) { %>
+        <div>
+          <div>
+            <div>
+              <h3>There was an error:</h3>
+              <div>
+                <ul role="list">
+                  <li><%= errorMessage %></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <% } %>
+
         <form
           method="POST"
           action="/game/<% if (editing) { %>edit<% } else { %>add<% } %>"
-          enctype="multipart/form-data"
         >
           <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
           <div class="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-3">
@@ -43,12 +56,12 @@
               <label for="description"> Description </label>
               <div>
                 <textarea required id="description" name="description" rows="3">
-                        <% if (editing || hasError) { %><%= game.description %><% } %></textarea
+<% if (editing || hasError) { %><%= game.description %><% } %></textarea
                 >
               </div>
             </div>
 
-            <div>
+            <!-- <div>
               <label for="status"> Status </label>
               <div class="mt-1">
                 <input
@@ -59,7 +72,31 @@
                   value="<% if (editing || hasError) { %><%= game.status %><% } %>"
                 />
               </div>
+            </div> -->
+            <div>
+              <label for="gameMaster"> Game Master Email </label>
+              <div class="mt-1">
+                <input
+                  name="gameMaster"
+                  id="gameMaster"
+                  type="email"
+                  value="<% if (editing || hasError) { %><%= game.status %><% } %>"
+                />
+              </div>
             </div>
+
+              <div>
+                <label for="player"> Player Email </label>
+                <div class="mt-1">
+                  <input
+                    name="player"
+                    id="player"
+                    type="email"
+                    value="<% if (editing || hasError) { %><%= game.status %><% } %>"
+                  />
+                </div>
+              </div>
+  
 
             <% if (editing) { %>
             <input type="hidden" name="gameId" value="<%= game._id %>" />
