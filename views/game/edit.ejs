@@ -1,20 +1,21 @@
     <%- include('../includes/head.ejs') %>
+    <link rel="stylesheet" href="/css/forms.css">
   </head>
 
   <body>
     <%- include ("../includes/nav.ejs") %>
 
-    <main>
+    <main class="edit-all-games">
       <div>
         <h1><%= title %></h1>
 
         <% if (errorMessage) { %>
         <div>
           <div>
-            <div>
-              <h3>There was an error:</h3>
+            <div class="error-message">
+              <h3 class="error-title">There was an error:</h3>
               <div>
-                <ul role="list">
+                <ul class="error-list" role="list">
                   <li><%= errorMessage %></li>
                 </ul>
               </div>
@@ -28,16 +29,17 @@
           action="/game/<% if (editing) { %>edit<% } else { %>add<% } %>"
         >
           <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
-          <div class="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-3">
-            <div class="sm:col-span-3">
+          <!-- <div class="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-3"> -->
+            <div class="mb-3">
               <label
                 for="title"
-                class="block text-sm font-medium text-gray-700"
+                class="form-label"
               >
                 Game Name
               </label>
               <div>
                 <input
+                class="form-control"
                   required
                   type="text"
                   name="name"
@@ -49,9 +51,9 @@
             </div>
 
             <div>
-              <label for="description"> Description </label>
-              <div>
-                <textarea required id="description" name="description" rows="3">
+              <label class="form-label" for="description"> Description </label>
+              <div class="mb-3">
+                <textarea class="form-control" required id="description" name="description" rows="3">
 <% if (editing || hasError) { %><%= game.description %><% } %></textarea
                 >
               </div>
@@ -68,7 +70,9 @@
                 Player
               </label>
               <div>
+
                 <input
+                class="form-control"
                   required
                   type="text"
                   name="highestScoreEverName"
@@ -181,12 +185,12 @@
             <input type="hidden" name="gameId" value="<%= game._id %>" />
             <% } %>
 
-            <div>
-              <button type="submit">
+            <div class="mb-3">
+              <button class="btn btn-primary" type="submit">
                 <% if (editing) { %>Update<% } else { %>Add<% } %> Game
               </button>
             </div>
-          </div>
+          <!-- </div> -->
         </form>
 
         <% if (editing) { %>
@@ -194,7 +198,7 @@
           <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
           <input type="hidden" name="gameId" value="<%= game._id %>" />
 
-          <button type="submit">Delete</button>
+          <button class="btn btn-danger" type="submit">Delete</button>
         </form>
         <% } %>
 
