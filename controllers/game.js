@@ -1,6 +1,5 @@
 const { validationResult } = require("express-validator");
 const Game = require("../models/game");
-const User = require("../models/user");
 
 exports.getAllGames = (req, res, next) => {
   // TODO: Need to make this filter all games where the user is a player
@@ -53,14 +52,14 @@ exports.postAddGame = (req, res, next) => {
         name: name,
         description: description,
         gameMasters: gameMasters,
-        players: players
+        players: players,
         // TODO: Put more fields here
       },
       errorMessage: errors.array()[0].msg,
       validationErrors: errors.array(),
     });
   }
-  
+
   const gameMasters = Users.find({ email: gameMastersEmail });
   const players = Users.find({ email: playersEmail });
 

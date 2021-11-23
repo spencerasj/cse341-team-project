@@ -1,0 +1,65 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  padding: 0;
+  margin: 0;
+}
+
+main {
+  padding: 0;
+  margin: auto;
+  height: 100vh;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Road Rage", cursive;
+}
+
+p,
+a {
+  font-family: "Poppins", sans-serif;
+}
+
+.navbar {
+  background-color: #d7263d;
+  text-align: left;
+}
+.navbar .nav-link {
+  color: white;
+}
+.title {
+  background-image: url("../images/mario.jpg");
+  background-position-x: -50px;
+  background-position-y: 25%;
+  height: 35vh;
+  background-size: cover;
+  align-items: center;
+}
+.title h1 {
+  margin: 2rem auto;
+  text-align: right;
+  color: white;
+  font-size: 8em;
+  padding-right: 1em;
+}
+.all-games-page {
+  justify-content: center;
+  align-items: center;
+}
+.login-page .sign-up-div {
+  margin: 2rem;
+}
+footer {
+  background-color: #d7263d;
+  color: white;
+  margin: 0;
+}
+footer p {
+  padding: 2em;
+}
