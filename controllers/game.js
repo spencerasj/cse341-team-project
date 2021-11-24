@@ -187,10 +187,15 @@ exports.getEditGame = (req, res, next) => {
         return res.redirect("/game/all");
       }
 
-      // TODO: check to see if the user is a game master, if not, error and redirect
-      // if (user._id.toString() not in game.gameMasters) {
-      //   return res.redirect("/games/all");
-      // }
+      // Check to see if the user is a game master, if not, redirect
+
+      if (
+        game.gameMasters.filter(
+          (gameMaster) => gameMaster._id.toString() === req.user._id.toString()
+        ).length !== 1
+      ) {
+        return res.redirect("/game/all");
+      }
 
       res.render("game/edit", {
         title: "Edit Game",
