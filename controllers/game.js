@@ -88,16 +88,11 @@ exports.postAddGame = (req, res, next) => {
           score: lowestScoreEverScore,
           date: lowestScoreEverDate,
         },
-        // gameMasters: gameMasters,
-        // players: players,
       },
       errorMessage: errors.array()[0].msg,
       validationErrors: errors.array(),
     });
   }
-
-  // const gameMasters = Users.find({ email: gameMastersEmail });
-  // const players = Users.find({ email: playersEmail });
 
   const game = new Game({
     name: name,
@@ -116,11 +111,6 @@ exports.postAddGame = (req, res, next) => {
         date: lowestScoreEverDate,
       },
     },
-    // gameMasters: gameMasters,
-    // players: players,
-
-    // TODO: Check syntax of this
-    // gameMasters: [userId]
   });
 
   game
@@ -153,9 +143,9 @@ exports.postAddGame = (req, res, next) => {
     });
 };
 
-exports.postAddPlayerToGame = (req, res, next) => {
-  const gameId = req.body.gameId;
-  const playerId = req.body.playerId;
+// exports.postAddPlayerToGame = (req, res, next) => {
+//   const gameId = req.body.gameId;
+//   const playerId = req.body.playerId;
 
   // Get game from db
   //  If user not a game master:
@@ -183,7 +173,7 @@ exports.postAddPlayerToGame = (req, res, next) => {
   //     error.httpStatusCode = 500;
   //     return next(error);
   //   });
-};
+// };
 
 exports.getEditGame = (req, res, next) => {
   const editMode = req.query.edit;
