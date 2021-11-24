@@ -25,7 +25,7 @@ routes
     console.log('inside of index.js');
     
     res.render('index', {
-      title: "WELCOME to Beat This! ",
+      title: "WELCOME to Beat That! ",
       path: '/index'
     });
   })

@@ -9,8 +9,8 @@
   <body>
     <%- include ("../includes/nav.ejs") %>
 
-    <main>
-      <div>
+    <div class="container">
+      <div class="row">
         <h1><%= title %></h1>
 
         <form
@@ -20,10 +20,10 @@
         >
           <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
           <div class="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-3">
-            <div class="sm:col-span-3">
+            <div class="mb-3">
               <label
                 for="title"
-                class="block text-sm font-medium text-gray-700"
+                class="form-label"
               >
                 Name
               </label>
@@ -33,28 +33,30 @@
                   type="text"
                   name="name"
                   id="name"
+                  class="form-control"
                   value="<% if
                   (editing || hasError) { %><%= game.name %><% } %>"
                 />
               </div>
             </div>
 
-            <div>
-              <label for="description"> Description </label>
-              <div>
-                <textarea required id="description" name="description" rows="3">
+            <div class="mb-3">
+              <label for="description" clas="form-label"> Description </label>
+              
+                <textarea required id="description" name="description" rows="3" class="form-control">
                         <% if (editing || hasError) { %><%= game.description %><% } %></textarea
                 >
-              </div>
+              
             </div>
 
-            <div>
-              <label for="status"> Status </label>
+            <div class="mb-3">
+              <label for="status" class="form-label"> Status </label>
               <div class="mt-1">
                 <input
                   required
                   name="status"
                   id="status"
+                  class="form-control"
                   type="text"
                   value="<% if (editing || hasError) { %><%= game.status %><% } %>"
                 />
@@ -66,7 +68,7 @@
             <% } %>
 
             <div>
-              <button type="submit">
+              <button  type="submit" class="btn btn-primary">
                 <% if (editing) { %>Update<% } else { %>Add<% } %> Game
               </button>
             </div>
@@ -78,7 +80,7 @@
           <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
           <input type="hidden" name="gameId" value="<%= game._id %>" />
 
-          <button type="submit">Delete</button>
+          <button  type="submit" class="btn btn-danger">Delete</button>
         </form>
         <% } %>
       </div>

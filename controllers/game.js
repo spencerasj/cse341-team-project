@@ -3,7 +3,7 @@ const Game = require("../models/game");
 console.log('inside game controller');
 exports.getAllGames = (req, res, next) => {
   // TODO: Need to make this filter all games where the user is a player
-  console.log('get all games');
+  
   Game.find()
     // Game.find({ players: req.user._id })
     // .select('')
@@ -24,6 +24,7 @@ exports.getAllGames = (req, res, next) => {
 };
 
 exports.getAddGame = (req, res, next) => {
+  console.log('get scoreboard');
   res.render("game/edit", {
     title: "Add Game",
     path: "/game/add",
@@ -32,6 +33,25 @@ exports.getAddGame = (req, res, next) => {
     errorMessage: null,
     validationErrors: [],
   });
+};
+
+exports.getScoreBoard = (req, res, next) => {
+  Game.find()
+  // Game.find({ players: req.user._id })
+  // .select('')
+  // .populate('userId')
+  .then((games) => {
+  res.render("game/score", {
+    title: "Scoreboard",
+    path: "/game/score",
+    games: games,
+      });
+    })
+    .catch((err) => {
+      const error = new Error(err);
+      error.httpStatusCode = 500;
+      return next(error);
+    });
 };
 
 exports.postAddGame = (req, res, next) => {

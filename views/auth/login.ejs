@@ -7,12 +7,12 @@
 
   <body>
     <%- include('../includes/nav.ejs') %>
-
-    <main>
-      <div>
+    
+    <div class="container form-cont">
+      
         <% if (successMessage) { %>
-        <div>
-          <div>
+        <div class="row">
+          <div class="col-md-6 offset-md-3">
             <div>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -36,8 +36,8 @@
           </div>
         </div>
         <% } %> <% if (errorMessage) { %>
-        <div>
-          <div>
+        <div class="row">
+          <div class="col-md-6 offset-md-3">
             <div>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -64,49 +64,49 @@
         </div>
         <% } %>
 
-        <div>
+        <div class="row">
+          <div  class="col-md-6 offset-md-3">
           <h2>Sign in to your account</h2>
           <p>
             Or
             <a href="/sign-up"> sign up now </a>
           </p>
+          </div>
         </div>
 
-        <div>
-          <div>
-            <form action="/login" method="POST">
+        <div class="row">
+          <div class="col-md-6 offset-md-3">
+            <form action="/login" method="POST" class="login-frm ">
               <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
 
-              <div>
-                <label for="email"> Email address </label>
-                <div>
-                  <input
-                    id="email"
-                    name="email"
-                    type="email"
-                    autocomplete="email"
-                    required
-                  />
-                </div>
+              <div class="gx-5">
+                <label for="email" class="form-label"> Email address </label>
+                <input
+                  id="email"
+                  name="email"
+                  type="email"
+                  autocomplete="email"
+                  class="form-control"
+                  required
+                />
               </div>
 
-              <div>
-                <label for="password"> Password </label>
-                <div>
+              <div class="gx-5">
+                <label for="password" class="form-label"> Password </label>
                   <input
                     id="password"
                     name="password"
                     type="password"
                     autocomplete="current-password"
+                    class="form-control"
                     required
                   />
-                </div>
               </div>
 
-              <div>
-                <button type="submit">Sign in</button>
+              <div class="btn-cont gx-5">
+                <button type="submit" class="btn btn-primary">Sign in</button>
               </div>
-              <div>
+              <div class="btn-cont">
                 <div class="text-sm">
                   <a href="/reset"> Forgot your password? </a>
                 </div>
@@ -114,8 +114,7 @@
             </form>
           </div>
         </div>
-      </div>
-    </main>
+    </div>
 
     <%- include('../includes/footer.ejs') %>
   </body>

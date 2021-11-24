@@ -10,8 +10,8 @@
   <body>
     <%- include('../includes/nav.ejs') %>
 
-    <main>
-      <div>
+    <div class="container">
+      <div class="row">
         <% if (games.length > 0) { %>
         <p class="text-center text-gray-600 mt-2">
           Click a game to edit or delete.
@@ -31,7 +31,7 @@
       </ul>
 
       <a href="/game/add"> Create a new game </a>
-    </main>
+    </div>
 
     <%- include('../includes/footer.ejs') %>
   </body>

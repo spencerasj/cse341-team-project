@@ -8,28 +8,28 @@
   </head>
 
   <body>
-    
+    <%- include('./includes/nav.ejs') %>
     <div class="container">
-      <div class="row">
-        <%- include('./includes/nav.ejs') %>
-      </div>
       
       <div class="row">
         <h2>
           <%= title %>
         </h2>
       </div>
-      <dib class="row">
+      <div class="row">
         
-        <p>I am so excited for your visit today!</p>
-        <p>6.5 years ago I said YES to the BLING. Because of that decision I lost 90 lbs with in my first 8 months of starting. I felt beautiful, confident and ALIVE! I had become that girl who I always wanted to be, all because of $5 jewelry. Are you ready for a change? Join today :)</p>
-        <div class="btn-group">
-          <a type="button" class="btn btn-md btn-default" href="shopPages/shop"><span class="fas fa-shopping-basket"></span> Shop</a>
-          <a type="button" class="btn btn-md btn-default" href=""><span class="fas fa-chalkboard-teacher"></span> Join a Party</a>
-          <a type="button" class="btn btn-md btn-primary" href=""><span class="fas fa-users"></span> Join my Team</a> 
-        </div>
-        
-      </dib>
+        <p>I am so excited <span class="whoop">WHOOP</span> your score today!</p>
+        <p>Join a game today :) Enter your Invitation Token Below</p>
+        <form>
+          <div class="mb-3">
+            <label for="game-token" class="form-label">Invitation Token</label>
+            <input required  type="text" name="name"  id="name"  class="form-control" />
+          </div>
+          <button  type="submit" class="btn btn-success">
+            Submit Token
+          </button>
+        </form>
+      </div>
       <div class="row">
         <%- include('./includes/footer.ejs') %>
       </div>
