@@ -2,11 +2,8 @@ const { validationResult } = require("express-validator");
 const Game = require("../models/game");
 
 exports.getAllGames = (req, res, next) => {
-  // TODO: Need to make this filter all games where the user is a player
-  Game.find()
-    // Game.find({ players: req.user._id })
-    // .select('')
-    // .populate('userId')
+  Game.find({ gameMasters: req.user._id })
+    .populate("gameMasters")
     .then((games) => {
       res.render("game/all", {
         title: "List of Games",
@@ -35,11 +32,11 @@ exports.getAddGame = (req, res, next) => {
 
 exports.getScoreBoard = (req, res, next) => {
   Game.find()
-  .then((games) => {
-  res.render("game/score", {
-    title: "Scoreboard",
-    path: "/game/score",
-    games: games,
+    .then((games) => {
+      res.render("game/score", {
+        title: "Scoreboard",
+        path: "/game/score",
+        games: games,
       });
     })
     .catch((err) => {
@@ -142,32 +139,32 @@ exports.postAddGame = (req, res, next) => {
 //   const gameId = req.body.gameId;
 //   const playerId = req.body.playerId;
 
-  // Get game from db
-  //  If user not a game master:
-  // Error message
-  // If user is a game master:
-  // get user with playerId:
+// Get game from db
+//  If user not a game master:
+// Error message
+// If user is a game master:
+// get user with playerId:
 
-  // Add player to game as a player
+// Add player to game as a player
 
-  // Save game
-  // redirect
+// Save game
+// redirect
 
-  // const game = new Game({
-  //   name: name,
-  //   description: description,
-  //   status: status,
-  // });
-  // game
-  //   .save()
-  //   .then((result) => {
-  //     res.redirect("/games/all");
-  //   })
-  //   .catch((err) => {
-  //     const error = new Error(err);
-  //     error.httpStatusCode = 500;
-  //     return next(error);
-  //   });
+// const game = new Game({
+//   name: name,
+//   description: description,
+//   status: status,
+// });
+// game
+//   .save()
+//   .then((result) => {
+//     res.redirect("/games/all");
+//   })
+//   .catch((err) => {
+//     const error = new Error(err);
+//     error.httpStatusCode = 500;
+//     return next(error);
+//   });
 // };
 
 exports.getEditGame = (req, res, next) => {
@@ -293,7 +290,7 @@ exports.postDeleteGame = (req, res, next) => {
           (gameMaster) => gameMaster._id.toString() === req.user._id.toString()
         ).length === 1
       ) {
-      return Game.deleteOne({ _id: gameId, gameMaster: req.user._id });
+        return Game.deleteOne({ _id: gameId, gameMaster: req.user._id });
       } else {
         return res.redirect("/game/all");
       }
