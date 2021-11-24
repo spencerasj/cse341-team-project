@@ -1,0 +1,12 @@
+.form-label,
+.form-control {
+  font-family: "Poppins", sans-serif;
+}
+.login-page .btn-primary,
+.signup-page .btn-primary,
+.edit-all-games .btn-primary,
+.reset-page .btn-primary {
+  background-color: #046865;
+  border-color: #046865;
+  font-family: "Poppins", sans-serif;
+}

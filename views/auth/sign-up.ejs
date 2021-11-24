@@ -1,19 +1,21 @@
 
-    <%- include('../includes/head.ejs') %>
-    <link rel="stylesheet" href="/css/forms.css">
+<%- include('../includes/head.ejs') %>
+<link rel="stylesheet" href="/css/forms.css">
   <title><%= title %></title>
+
   </head>
 
   <body>
     <%- include('../includes/nav.ejs') %>
 
-    <main class="login-page">
+    <main class="signup-page">
       <div>
         <% if (errorMessage) { %>
         <div>
           <div>
             <div class="error-message">
-              <h3 class="error-title">THERE WAS AN ERROR LOGGING IN</h3>
+              <h3 class="error-title">There was an error in sign-up</h3>
+
               <div>
                 <ul class="error-list" role="list">
                   <li><%= errorMessage %></li>
@@ -24,18 +26,32 @@
         </div>
         <% } %>
 
-        <div class="login-div">
-          <div>
-          <h2>Log in to your account</h2>
+        <div class="signup-div">
+          <h2>Sign up</h2>
           <p>
             Or
-            <a href="/auth/sign-up"> Sign up now </a>
+            <a href="/auth/login"> Already have an account?</a>
           </p>
-          </div>
+        </div>
 
+        <div>
           <div>
-            <form action="/auth/login" method="POST">
+            <form action="/auth/sign-up" method="POST">
               <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+
+              <div class="mb-3">
+                <label class="form-label" for="name"> Name </label>
+                <div>
+                  <input
+                  class="form-control"
+                    id="name"
+                    name="name"
+                    type="name"
+                    autocomplete="name"
+                    required
+                  />
+                </div>
+              </div>
 
               <div class="mb-3">
                 <label class="form-label" for="email"> Email address </label>
@@ -53,29 +69,37 @@
 
               <div class="mb-3">
                 <label class="form-label" for="password"> Password </label>
-                <div >
+                <div>
                   <input
                   class="form-control"
                     id="password"
                     name="password"
                     type="password"
                     autocomplete="current-password"
-                    class="form-control"
                     required
                   />
+                </div>
               </div>
 
-              <!-- <div> -->
-                <button class="btn btn-primary mb-3" type="submit">Login</button>
-              <!-- </div> -->
-              <div>
-                <div class="text-sm">
-                  <a href="/auth/reset"> Forgot your password? </a>
+              <div class="mb-3">
+                <label class="form-label" for="confirmPassword"> Confirm Password </label>
+                <div>
+                  <input
+                  class="form-control"
+                    id="confirmPassword"
+                    name="confirmPassword"
+                    type="password"
+                    autocomplete="confirmPassword"
+                    required
+                  />
                 </div>
+              </div>
+
+              <div>
+                <button class="btn btn-primary" type="submit">Sign up</button>
               </div>
             </form>
           </div>
-        </div>
         </div>
       </div>
     </main>

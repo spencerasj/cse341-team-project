@@ -1,41 +1,48 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    
-    <title><%= title %></title>
+
     <%- include('./includes/head.ejs') %>
     
   </head>
 
   <body>
-    <%- include('./includes/nav.ejs') %>
-    <div class="container">
-      
+    <div class="container-fluid">
       <div class="row">
-        <h2>
+        <%- include('./includes/nav.ejs') %>
+      </div>
+    </div>
+  <main class="homepage">
+      <div class="row title">      
+        <h1>
           <%= title %>
-        </h2>
+        </h1>
       </div>
-      <div class="row">
-        
-        <p>I am so excited <span class="whoop">WHOOP</span> your score today!</p>
-        <p>Join a game today :) Enter your Invitation Token Below</p>
-        <form>
-          <div class="mb-3">
-            <label for="game-token" class="form-label">Invitation Token</label>
-            <input required  type="text" name="name"  id="name"  class="form-control" />
+      <section class="container-fluid">
+        <div class="row game-info">
+          <div class="column">
+          <ul>
+            <li>Like to play games?</li>
+            <li>Add your favorite game playing family and friends to a group</li>
+            <li>Choose your game</li>
+            <li>Keep track of all your high and low scores</li>
+            <li>Fight to beat the previous scores</li>
+          </ul>
           </div>
-          <button  type="submit" class="btn btn-success">
-            Submit Token
-          </button>
-        </form>
-      </div>
-      <div class="row">
-        <%- include('./includes/footer.ejs') %>
-      </div>
+          <div class="column"></div>
+        </div>
+      </section>
+      </main>
+    <div class="row">
+      <%- include('./includes/footer.ejs') %>
+    </div>
+  </body>
+   <!-- <dib class="row"> -->
         
+        <!-- <div class="btn-group">
+          <a type="button" class="btn btn-md btn-default" href="shopPages/shop"><span class="fas fa-shopping-basket"></span> Shop</a>
+          <a type="button" class="btn btn-md btn-default" href=""><span class="fas fa-chalkboard-teacher"></span> Join a Party</a>
+          <a type="button" class="btn btn-md btn-primary" href=""><span class="fas fa-users"></span> Join my Team</a> 
+        </div> -->
         
-      </div>
+      <!-- </dib> -->
       
 
     

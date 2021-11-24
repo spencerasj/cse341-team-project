@@ -22,18 +22,10 @@ exports.getLogin = (req, res, next) => {
     errorMessage = null;
   }
 
-  let successMessage = req.flash("success");
-  if (successMessage.length > 0) {
-    successMessage = successMessage[0];
-  } else {
-    successMessage = null;
-  }
-
   res.render("auth/login", {
     path: "/login",
     title: "Login",
     errorMessage: errorMessage,
-    successMessage: successMessage,
     oldInput: { email: "", password: "" },
     validationErrors: [],
   });
@@ -49,7 +41,6 @@ exports.postLogin = (req, res, next) => {
       path: "/login",
       title: "Login",
       errorMessage: errors.array()[0].msg,
-      successMessage: null,
       validationErrors: errors.array(),
     });
   }
@@ -61,7 +52,6 @@ exports.postLogin = (req, res, next) => {
           path: "/login",
           title: "Login",
           errorMessage: "Invalid email or password.",
-          successMessage: "",
           oldInput: {
             email: email,
             password: password,
@@ -85,7 +75,6 @@ exports.postLogin = (req, res, next) => {
             path: "/login",
             title: "Login",
             errorMessage: "Invalid email or password.",
-            successMessage: "",
             oldInput: {
               email: email,
               password: password,
@@ -106,8 +95,7 @@ exports.postLogin = (req, res, next) => {
 };
 
 exports.postLogout = (req, res, next) => {
-  req.session.destroy((err) => {
-    console.log(err);
+  req.session.destroy(() => {
     res.redirect("/");
   });
 };
@@ -120,7 +108,7 @@ exports.getSignUp = (req, res, next) => {
     message = null;
   }
 
-  res.render("auth/signup", {
+  res.render("auth/sign-up", {
     path: "/sign-up",
     title: "Sign Up",
     errorMessage: message,
@@ -134,6 +122,7 @@ exports.getSignUp = (req, res, next) => {
 };
 
 exports.postSignUp = (req, res, next) => {
+  const name = req.body.name;
   const email = req.body.email;
   const password = req.body.password;
 
@@ -143,11 +132,12 @@ exports.postSignUp = (req, res, next) => {
 
   if (!errors.isEmpty()) {
     console.log(errors.array());
-    return res.status(422).render("auth/signup", {
+    return res.status(422).render("auth/sign-up", {
       path: "/sign-up",
       title: "Sign Up",
       errorMessage: errors.array()[0].msg,
       oldInput: {
+        name: name,
         email: email,
         password: password,
         confirmPassword: req.body.confirmPassword,
@@ -162,9 +152,9 @@ exports.postSignUp = (req, res, next) => {
         .hash(password, 12)
         .then((hashedPassword) => {
           const user = new User({
+            name: name,
             email: email,
             password: hashedPassword,
-            cart: { items: [] },
           });
           return user.save();
         })
@@ -175,10 +165,10 @@ exports.postSignUp = (req, res, next) => {
           );
         })
         .then((result) => {
-          res.redirect("/login");
+          res.redirect("/auth/login");
           return transporter.sendMail({
             to: email,
-            from: "matt@steeleagency.com",
+            from: process.env.FROM_EMAIL,
             subject: "Sign Up Successful",
             html: "<h1>You successfully signed up!</h1>",
           });
@@ -228,7 +218,7 @@ exports.postReset = (req, res, next) => {
         res.redirect("/");
         transporter.sendMail({
           to: req.body.email,
-          from: "matt@steeleagency.com",
+          from: process.env.FROM_EMAIL,
           subject: "Password Reset",
           html: `
           <p>You requested a password reset</p>
@@ -315,7 +305,7 @@ exports.postNewPassword = (req, res, next) => {
       res.redirect("/login");
       transporter.sendMail({
         to: user.email,
-        from: "matt@steeleagency.com",
+        from: process.env.FROM_EMAIL,
         subject: "Password Reset Confirmation",
         html: `
         <p>Your password has been changed</p>`,
@@ -326,4 +316,39 @@ exports.postNewPassword = (req, res, next) => {
       error.httpStatusCode = 500;
       return next(error);
     });
+};
+
+exports.getCreateUser = (req, res, next) => {
+  let errorMessage = req.flash("error");
+  if (errorMessage.length > 0) {
+    errorMessage = errorMessage[0];
+  } else {
+    errorMessage = null;
+  }
+
+  res.render("/user/create-user", {
+    path: "/user/create-user",
+    title: "Create User",
+    errorMessage: errorMessage,
+  });
+};
+
+exports.postCreateUser = (req, res, next) => {
+  const password = req.body.password;
+  const userId = req.body.userId;
+  const passwordToken = req.body.passwordToken;
+
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    console.log(errors.array());
+
+    res.status(422).render("/user/create-user", {
+      path: "/user/create-user",
+      title: "Create User",
+      errorMessage: errors.array()[0].msg,
+      userId: userId.toString(),
+      passwordToken: passwordToken,
+      validationErrors: errors.array(),
+    });
+  }
 };
