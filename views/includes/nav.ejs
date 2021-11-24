@@ -1,3 +1,4 @@
+
 <nav class="navbar navbar-expand-lg">
   <div class="container-fluid">
     <a class="navbar-brand" href="#"></a>
@@ -22,6 +23,9 @@
             >Home</a
           >
         </li>
+        <li class="nav-item">
+          <a class="nav-link <%= path === '/game/score' ? 'active' : ''%>" href="/game/score">Scoreboard</a>
+        </li>
         <% if (isAuthenticated) { %>
         <li class="nav-item">
           <a
@@ -39,7 +43,6 @@
           >
         </li>
         <% } %> <% if (!isAuthenticated) { %>
-
         <li class="nav-item">
           <a
             class="nav-link <%= path === '/auth/sign-up' ? 'active' : ''%>"
@@ -68,24 +71,4 @@
     </div>
   </div>
 </nav>
-<!-- 
-<% if (path === '/') { %>
-<a href="/" class="active"> Home </a>
-<% } else { %>
-<a href="/"> Home </a>
-<% } %> - <% if (path === '/game/all') { %>
-<a href="/game/all" class="active"> All Games </a>
-<% } else { %>
-<a href="/game/all"> All Games </a>
-<% } %> - <% if (path === '/game/add') { %>
-<a href="/game/add" class="active"> Add Game </a>
-<% } else { %>
-<a href="/game/add"> Add Game </a>
-<% } %>
 
-
-- <% if (path === '/game/edit') { %>
-<a href="/game/edit" class="active"> Edit Game </a>
-<% } else { %>
-<a href="/game/edit"> Edit Game </a>
-<% } %> -->

@@ -44,6 +44,7 @@
                   type="text"
                   name="name"
                   id="name"
+                  class="form-control"
                   value="<% if
                   (editing || hasError) { %><%= game.name %><% } %>"
                 />
@@ -56,7 +57,7 @@
                 <textarea class="form-control" required id="description" name="description" rows="3">
 <% if (editing || hasError) { %><%= game.description %><% } %></textarea
                 >
-              </div>
+              
             </div>
 
 
