@@ -59,9 +59,6 @@ exports.postAddGame = (req, res, next) => {
   const lowestScoreEverScore = req.body.lowestScoreEverScore;
   const lowestScoreEverDate = req.body.lowestScoreEverDate;
 
-  // const gameMastersEmail = req.body.gameMaster;
-  // const playersEmail = req.body.player;
-
   const errors = validationResult(req);
 
   if (!errors.isEmpty()) {
