@@ -188,7 +188,6 @@ exports.getEditGame = (req, res, next) => {
       }
 
       // Check to see if the user is a game master, if not, redirect
-
       if (
         game.gameMasters.filter(
           (gameMaster) => gameMaster._id.toString() === req.user._id.toString()
@@ -255,11 +254,15 @@ exports.postEditGame = (req, res, next) => {
 
   Game.findById(gameId)
     .then((game) => {
-      // TODO: Check to see if the logged in user is a game master
-      // if (game.gameMaster.userId.toString() !== req.user._id.toString()) {
-      //   return res.redirect("/");
-      // }
-      // TODO: update the object data with the form submission data
+      // Check to see if the logged in user is a game master
+      if (
+        game.gameMasters.filter(
+          (gameMaster) => gameMaster._id.toString() === req.user._id.toString()
+        ).length !== 1
+      ) {
+        return res.redirect("/game/all");
+      }
+
       game.name = updatedName;
       game.description = updatedDescription;
       game.highestScoreEver.name = updatedHighestScoreEverName;
