@@ -38,9 +38,7 @@
             >Add Game</a
           >
         </li>
-        <% } %>
-
-        <% if (!isAuthenticated) { %>
+        <% } %> <% if (!isAuthenticated) { %>
 
         <li class="nav-item">
           <a
@@ -62,7 +60,7 @@
         <li class="nav-item">
           <form action="/auth/logout" method="POST">
             <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
-            <button >Logout</button>
+            <button class="btn btn-primary">Logout</button>
           </form>
         </li>
         <% } %>
