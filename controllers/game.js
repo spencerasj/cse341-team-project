@@ -112,7 +112,7 @@ exports.postAddGame = (req, res, next) => {
   game
     .save()
     .then((result) => {
-      // This is a little hacky but it works to fix the issue of scores not saving on create game.
+      // Fixes the issue of scores not saving on create game. Also adds user as a game master
       Game.findById(result._id)
         .then((game) => {
           game.highestScoreEver.name = highestScoreEverName;
@@ -121,6 +121,8 @@ exports.postAddGame = (req, res, next) => {
           game.lowestScoreEver.name = lowestScoreEverName;
           game.lowestScoreEver.score = lowestScoreEverScore;
           game.lowestScoreEver.date = lowestScoreEverDate;
+
+          game.gameMasters.push(req.user._id);
 
           return game.save().then((result) => {
             res.redirect("/game/all");
