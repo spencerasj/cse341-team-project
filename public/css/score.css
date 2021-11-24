@@ -13,6 +13,8 @@
     background: white;
   }
 
+  .score-title{}
+
   .link:hover{cursor: pointer;}
   
   .scoreboard {
@@ -41,10 +43,10 @@
 .player div{float: left;}
 
 .fa-times{color: red; text-decoration: none;}
-.player__icon{width: 10%; margin-right: 10px;}
+.player__icon{width: 15%; margin-right: 10px;}
 .player__date{width: 25%; margin-right: 10px;} 
-.player__name{width: 50%;}
-.player__total{width: 10%; text-align: right;}
+.player__name{width: 30%;}
+.player__total{width: 15%; text-align: right;}
 .bottom{border-top: none; padding-top: 10px;
   padding-bottom: 10px;}
 

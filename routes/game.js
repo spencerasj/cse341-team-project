@@ -6,7 +6,7 @@ const isAuth = require("../middleware/is-auth");
 const router = express.Router();
 
 router.get("/all", isAuth, gameController.getAllGames);
-router.get("/score", isAuth, gameController.getScoreBoard);
+router.get("/score", gameController.getScoreBoard);
 
 router.get("/add", isAuth, gameController.getAddGame);
 router.post(

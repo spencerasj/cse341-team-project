@@ -6,19 +6,20 @@ class Board{
     constructor(root){
         this.root = root;
         this.game_list = JSON.parse(game_list);
-        this.games = [];
+        this.games = this.game_list;
         this.debug_title = 'Debugger';
         this.debug = '';
+        this.show_debug = false;
         this.admin = false;
         this.status = [];
         this.template = '';
         this.mount();
     }
     mount() {
-        //alert('Mount');
+        //alert('Mount: ' + JSON.stringify(this.game_list));
         this.debug_title = 'Game List JSON';
-        this.debug = this.game_list;
-        this.loadJson();
+        this.debug = JSON.stringify(this.game_list);
+        //this.loadJson();
         //this.root.innerHTML = '<h2>Test</h2>';
         this.update();
     }
@@ -39,73 +40,61 @@ class Board{
             temp += `
                         <div class="scoreboard">
                             <div class="row top">
-                                <span class="title"> ${game.name}</span>
+                                <h4 class="score-title"> ${game.name}</h4>
                             </div>
                             <div class="players row">
-                            `;
-            let cnt = game.players.length - 1;
-            let mid = cnt / 2;
-            game.players.forEach(function(player, index){
-                switch(index){
-                    case 0:
-                        temp += `
-                            <div class="player">
-                                <div class="player__icon">
-                                    <span class="fas fa-crown fa-2x"></span>
+                                <div class="player">
+                                    <div class="player__icon">
+                                        <span class="fas fa-crown fa-2x"></span>
+                                    </div>
+                                    <div class="player__date">
+                                        <span class="date-cont"> ${new Date(game.highestScoreEver.date).toLocaleDateString()}</span>
+                                    </div>
+                                    <div class="player__name">
+                                        ${game.highestScoreEver.name}
+                                    </div>
+                                    <div class="player__total">
+                                        ${game.highestScoreEver.score}
+                                    </div>
                                 </div>
-                                <div class="date">
-                                    <span class="date-cont"> ${player.date}</span>
+                                <div class="player loser">
+                                    <div class="player__icon">
+                                        <span class="fas fa-thumbs-down fa-2x"></span>
+                                    </div>
+                                    <div class="player__date">
+                                        ${new Date(game.lowestScoreEver.date).toLocaleDateString()}
+                                    </div>
+                                    <div class="player__name">
+                                        ${game.lowestScoreEver.name}
+                                    </div>
+                                    <div class="player__total">
+                                        ${game.lowestScoreEver.score}
+                                    </div>
+                                </div> 
+                            </div>
+                            <div class="row bottom">            
+                                <div class="note col-md-12">
+                                    ${game.description}
                                 </div>
-                                <div class="player__name">
-                                    ${player.name}
-                                </div>
-                                <div class="player__total">
-                                    ${player.score}
-                                </div>
-                            </div>`;
-                        break;
-                    case cnt:
-                        temp += `
-                            <div class="player loser">
-                                
-                                <div class="player__icon col">
-                                    <span class="fas fa-thumbs-down fa-2x"></span>
-                                </div>
-                                <div class="player_date">
-                                    ${player.date}
-                                </div>
-                                <div class="player__name col">
-                                    ${player.name}
-                                </div>
-                                <div class="player__total col">
-                                    ${player.score}
-                                </div>
-                            </div>`;
-                        break;
-                    
-                }
-                    
-            });             
-            temp += `    
-                        </div>
-                        <div class="row bottom">            
-                            <div class="note col-md-12">
-                                ${game.description}
                             </div>
                         </div>
-                    </div>
                     `;
         });
            
         temp += `  </div>
-                </div>
+                </div>`;
+        if(me.show_debug == true){
+            temp += `
                 <div class="row">
                     <div class="debug">
                         <h3>Debugger: ${me.debug_title}</h3>
                         <textarea class="form-control">${JSON.stringify(me.debug)}</textarea>
                     </div>
                 </div>
-            </div>`;
+            `;
+        }
+               
+        temp += `</div>`;
                       
         this.root.innerHTML = temp;
         this.setHandlers('.expand-card');
@@ -171,7 +160,7 @@ class Board{
             // Generate random date
            
             
-            let rand = me.genRandomInt(20);
+           /* let rand = me.genRandomInt(20);
             if(rand == 0){
                 rand += 2;
             }
@@ -191,7 +180,7 @@ class Board{
                 return b.score - a.score;
             });
             games.push(game);
-            
+            */
         });
         this.debug = JSON.stringify(this.games);
     }
