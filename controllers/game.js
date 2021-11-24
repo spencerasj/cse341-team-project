@@ -288,8 +288,16 @@ exports.postDeleteGame = (req, res, next) => {
         return next(new Error("game not found"));
       }
 
-      // TODO: Need to modify this so that only gamemasters can delete thte game
+      // Only a gamemaster can delete a game
+      if (
+        game.gameMasters.filter(
+          (gameMaster) => gameMaster._id.toString() === req.user._id.toString()
+        ).length === 1
+      ) {
       return Game.deleteOne({ _id: gameId, gameMaster: req.user._id });
+      } else {
+        return res.redirect("/game/all");
+      }
     })
     .then(() => {
       res.redirect("/game/all");
