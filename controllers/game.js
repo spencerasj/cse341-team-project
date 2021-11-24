@@ -23,7 +23,6 @@ exports.getAllGames = (req, res, next) => {
 };
 
 exports.getAddGame = (req, res, next) => {
-  console.log('get scoreboard');
   res.render("game/edit", {
     title: "Add Game",
     path: "/game/add",
@@ -36,9 +35,6 @@ exports.getAddGame = (req, res, next) => {
 
 exports.getScoreBoard = (req, res, next) => {
   Game.find()
-  // Game.find({ players: req.user._id })
-  // .select('')
-  // .populate('userId')
   .then((games) => {
   res.render("game/score", {
     title: "Scoreboard",
