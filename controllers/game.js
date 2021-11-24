@@ -36,7 +36,15 @@ exports.getAddGame = (req, res, next) => {
 exports.postAddGame = (req, res, next) => {
   const name = req.body.name;
   const description = req.body.description;
-  const status = req.body.status;
+  const highestScoreEverName = req.body.highestScoreEverName;
+  const highestScoreEverScore = req.body.highestScoreEverScore;
+  const highestScoreEverDate = req.body.highestScoreEverDate;
+  const lowestScoreEverName = req.body.lowestScoreEverName;
+  const lowestScoreEverScore = req.body.lowestScoreEverScore;
+  const lowestScoreEverDate = req.body.lowestScoreEverDate;
+
+  // const gameMastersEmail = req.body.gameMaster;
+  // const playersEmail = req.body.player;
 
   const errors = validationResult(req);
 
@@ -50,25 +58,73 @@ exports.postAddGame = (req, res, next) => {
       game: {
         name: name,
         description: description,
-        status: status,
-        // TODO: Put more fields here
+        highestScoreEver: {
+          name: highestScoreEverName,
+          score: highestScoreEverScore,
+          date: highestScoreEverDate,
+        },
+        lowestScoreEver: {
+          name: lowestScoreEverName,
+          score: lowestScoreEverScore,
+          date: lowestScoreEverDate,
+        },
+        // gameMasters: gameMasters,
+        // players: players,
       },
       errorMessage: errors.array()[0].msg,
       validationErrors: errors.array(),
     });
   }
 
+  // const gameMasters = Users.find({ email: gameMastersEmail });
+  // const players = Users.find({ email: playersEmail });
+
   const game = new Game({
     name: name,
     description: description,
-    status: status,
+    game: {
+      name: name,
+      description: description,
+      highestScoreEver: {
+        name: highestScoreEverName,
+        score: highestScoreEverScore,
+        date: highestScoreEverDate,
+      },
+      lowestScoreEver: {
+        name: lowestScoreEverName,
+        score: lowestScoreEverScore,
+        date: lowestScoreEverDate,
+      },
+    },
+    // gameMasters: gameMasters,
+    // players: players,
+
     // TODO: Check syntax of this
     // gameMasters: [userId]
   });
+
   game
     .save()
     .then((result) => {
-      res.redirect("/game/all");
+      // This is a little hacky but it works to fix the issue of scores not saving on create game.
+      Game.findById(result._id)
+        .then((game) => {
+          game.highestScoreEver.name = highestScoreEverName;
+          game.highestScoreEver.score = highestScoreEverScore;
+          game.highestScoreEver.date = highestScoreEverDate;
+          game.lowestScoreEver.name = lowestScoreEverName;
+          game.lowestScoreEver.score = lowestScoreEverScore;
+          game.lowestScoreEver.date = lowestScoreEverDate;
+
+          return game.save().then((result) => {
+            res.redirect("/game/all");
+          });
+        })
+        .catch((err) => {
+          const error = new Error(err);
+          error.httpStatusCode = 500;
+          return next(error);
+        });
     })
     .catch((err) => {
       const error = new Error(err);
@@ -147,8 +203,12 @@ exports.postEditGame = (req, res, next) => {
   const gameId = req.body.gameId;
   const updatedName = req.body.name;
   const updatedDescription = req.body.description;
-  const updatedStatus = req.body.status;
-  // TODO: Add more Fields Here
+  const updatedHighestScoreEverName = req.body.highestScoreEverName;
+  const updatedHighestScoreEverScore = req.body.highestScoreEverScore;
+  const updatedHighestScoreEverDate = req.body.highestScoreEverDate;
+  const updatedLowestScoreEverName = req.body.lowestScoreEverName;
+  const updatedLowestScoreEverScore = req.body.lowestScoreEverScore;
+  const updatedLowestScoreEverDate = req.body.lowestScoreEverDate;
 
   const errors = validationResult(req);
 
@@ -162,8 +222,16 @@ exports.postEditGame = (req, res, next) => {
         _id: gameId,
         name: updatedName,
         description: updatedDescription,
-        status: updatedStatus,
-        // TODO: Add more fields here
+        highestScoreEver: {
+          name: updatedHighestScoreEverName,
+          score: updatedHighestScoreEverScore,
+          date: updatedHighestScoreEverDate,
+        },
+        lowestScoreEver: {
+          name: updatedLowestScoreEverName,
+          score: updatedLowestScoreEverScore,
+          date: updatedLowestScoreEverDate,
+        },
       },
       errorMessage: errors.array()[0].msg,
       validationErrors: errors.array(),
@@ -179,7 +247,12 @@ exports.postEditGame = (req, res, next) => {
       // TODO: update the object data with the form submission data
       game.name = updatedName;
       game.description = updatedDescription;
-      game.status = updatedStatus;
+      game.highestScoreEver.name = updatedHighestScoreEverName;
+      game.highestScoreEver.score = updatedHighestScoreEverScore;
+      game.highestScoreEver.date = updatedHighestScoreEverDate;
+      game.lowestScoreEver.name = updatedLowestScoreEverName;
+      game.lowestScoreEver.score = updatedLowestScoreEverScore;
+      game.lowestScoreEver.date = updatedLowestScoreEverDate;
 
       return game.save().then((result) => {
         res.redirect("/game/all");

@@ -24,7 +24,7 @@
           <span style="font-weight: bold"><%= game.name %></span>
 
           <span> <%= game.description %> </span>
-          <span> status: <%= game.status %> </span>
+          <span> Game Masters: <%= game.gameMasters[0] %> </span>
           <a href="/game/edit/<%= game._id %>?edit=true">Edit</a>
         </li>
         <% } %>
