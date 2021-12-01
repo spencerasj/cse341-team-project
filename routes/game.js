@@ -27,6 +27,19 @@ router.post(
 );
 router.get("/edit/:gameId", isAuth, gameController.getEditGame);
 router.post(
+  "/add-gamemaster",
+  [
+    body("gameId")
+      .isString()
+      .withMessage("Game ID is invalid"),
+    body("email")
+      .isEmail()
+      .withMessage("Needs to be a valid email."),
+  ],
+  isAuth,
+  gameController.postAddGameMaster
+);
+router.post(
   "/edit",
   [
     body("name")
