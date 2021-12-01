@@ -10,7 +10,7 @@ class Board{
         this.games = this.game_list;
         this.debug_title = 'Debugger';
         this.debug = '';
-        this.show_debug = true;
+        this.show_debug = false;
         this.admin = false;
         this.status = [];
         this.template = '';
