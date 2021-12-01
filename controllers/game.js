@@ -40,17 +40,18 @@ exports.getScoreBoard = (req, res, next) => {
   // .select('')
   // .populate('userId')
   .then((games) => {
-  res.render("game/score", {
-    title: "Scoreboard",
-    path: "/game/score",
-    games: games,
-      });
-    })
-    .catch((err) => {
-      const error = new Error(err);
-      error.httpStatusCode = 500;
-      return next(error);
+    res.render("game/score", {
+      title: "Scoreboard",
+      path: "/game/score",
+      games: games,
+      user: req.user
     });
+  })
+  .catch((err) => {
+    const error = new Error(err);
+    error.httpStatusCode = 500;
+    return next(error);
+  });
 };
 
 exports.postAddGame = (req, res, next) => {
