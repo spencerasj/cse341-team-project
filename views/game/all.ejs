@@ -24,14 +24,14 @@
           <span style="font-weight: bold"><%= game.name %></span>
 
           <span> <%= game.description %> </span>
-          <span> Game Masters: <%= game.gameMasters[0] %> </span>
+          <span> Game Masters: <% for (let gameMaster of game.gameMasters) { %> <%= gameMaster.name %> <% } %></span>
           <a href="/game/edit/<%= game._id %>?edit=true">Edit</a>
         </li>
         <% } %>
       </ul>
 
       <a href="/game/add"> Create a new game </a>
-    </main>
+    </div>
 
     <%- include('../includes/footer.ejs') %>
   </body>

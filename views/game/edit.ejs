@@ -29,8 +29,7 @@
           action="/game/<% if (editing) { %>edit<% } else { %>add<% } %>"
         >
           <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
-          <!-- <div class="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-3"> -->
-            <div class="mb-3">
+            <div>
               <label
                 for="title"
                 class="form-label"
@@ -44,6 +43,7 @@
                   type="text"
                   name="name"
                   id="name"
+                  class="form-control"
                   value="<% if
                   (editing || hasError) { %><%= game.name %><% } %>"
                 />
@@ -52,20 +52,19 @@
 
             <div>
               <label class="form-label" for="description"> Description </label>
-              <div class="mb-3">
+              <div>
                 <textarea class="form-control" required id="description" name="description" rows="3">
 <% if (editing || hasError) { %><%= game.description %><% } %></textarea
                 >
-              </div>
+              
             </div>
 
 
             <h2>Highest Score Ever</h2>
 
-            <div class="sm:col-span-3">
+            <div>
               <label
                 for="highestScoreEverName"
-                class="block text-sm font-medium text-gray-700"
               >
                 Player
               </label>
@@ -83,10 +82,9 @@
               </div>
             </div>
 
-            <div class="sm:col-span-3">
+            <div>
               <label
                 for="highestScoreEverScore"
-                class="block text-sm font-medium text-gray-700"
               >
                 Score
               </label>
@@ -102,10 +100,9 @@
               </div>
             </div>
 
-            <div class="sm:col-span-3">
+            <div>
               <label
                 for="highestScoreEverDate"
-                class="block text-sm font-medium text-gray-700"
               >
                 Date
               </label>
@@ -124,10 +121,9 @@
 
             <h2>Lowest Score Ever</h2>
 
-            <div class="sm:col-span-3">
+            <div>
               <label
                 for="lowestScoreEverName"
-                class="block text-sm font-medium text-gray-700"
               >
                 Player
               </label>
@@ -143,10 +139,9 @@
               </div>
             </div>
 
-            <div class="sm:col-span-3">
+            <div>
               <label
                 for="lowestScoreEverScore"
-                class="block text-sm font-medium text-gray-700"
               >
                 Score
               </label>
@@ -162,10 +157,9 @@
               </div>
             </div>
 
-            <div class="sm:col-span-3">
+            <div>
               <label
                 for="lowestScoreEverDate"
-                class="block text-sm font-medium text-gray-700"
               >
                 Date
               </label>
@@ -185,7 +179,7 @@
             <input type="hidden" name="gameId" value="<%= game._id %>" />
             <% } %>
 
-            <div class="mb-3">
+            <div>
               <button class="btn btn-primary" type="submit">
                 <% if (editing) { %>Update<% } else { %>Add<% } %> Game
               </button>
@@ -198,7 +192,7 @@
           <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
           <input type="hidden" name="gameId" value="<%= game._id %>" />
 
-          <button class="btn btn-danger" type="submit">Delete</button>
+          <button class="btn btn-danger" type="submit" onclick="return confirm('Are you sure you want to delete this game?');">Delete</button>
         </form>
         <% } %>
 
@@ -209,7 +203,7 @@
 
             <div>
               <label for="emailToAdd"> Enter an email address to add another administrator </label>
-              <div class="mt-1">
+              <div>
                 <input
                 name="emailToAdd"
                 id="emailToAdd"

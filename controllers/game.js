@@ -2,11 +2,8 @@ const { validationResult } = require("express-validator");
 const Game = require("../models/game");
 
 exports.getAllGames = (req, res, next) => {
-  // TODO: Need to make this filter all games where the user is a player
-  Game.find()
-    // Game.find({ players: req.user._id })
-    // .select('')
-    // .populate('userId')
+  Game.find({ gameMasters: req.user._id })
+    .populate("gameMasters")
     .then((games) => {
       res.render("game/all", {
         title: "List of Games",
@@ -33,6 +30,22 @@ exports.getAddGame = (req, res, next) => {
   });
 };
 
+exports.getScoreBoard = (req, res, next) => {
+  Game.find()
+    .then((games) => {
+      res.render("game/score", {
+        title: "Scoreboard",
+        path: "/game/score",
+        games: games,
+      });
+    })
+    .catch((err) => {
+      const error = new Error(err);
+      error.httpStatusCode = 500;
+      return next(error);
+    });
+};
+
 exports.postAddGame = (req, res, next) => {
   const name = req.body.name;
   const description = req.body.description;
@@ -42,9 +55,6 @@ exports.postAddGame = (req, res, next) => {
   const lowestScoreEverName = req.body.lowestScoreEverName;
   const lowestScoreEverScore = req.body.lowestScoreEverScore;
   const lowestScoreEverDate = req.body.lowestScoreEverDate;
-
-  // const gameMastersEmail = req.body.gameMaster;
-  // const playersEmail = req.body.player;
 
   const errors = validationResult(req);
 
@@ -68,16 +78,11 @@ exports.postAddGame = (req, res, next) => {
           score: lowestScoreEverScore,
           date: lowestScoreEverDate,
         },
-        // gameMasters: gameMasters,
-        // players: players,
       },
       errorMessage: errors.array()[0].msg,
       validationErrors: errors.array(),
     });
   }
-
-  // const gameMasters = Users.find({ email: gameMastersEmail });
-  // const players = Users.find({ email: playersEmail });
 
   const game = new Game({
     name: name,
@@ -96,17 +101,12 @@ exports.postAddGame = (req, res, next) => {
         date: lowestScoreEverDate,
       },
     },
-    // gameMasters: gameMasters,
-    // players: players,
-
-    // TODO: Check syntax of this
-    // gameMasters: [userId]
   });
 
   game
     .save()
     .then((result) => {
-      // This is a little hacky but it works to fix the issue of scores not saving on create game.
+      // Fixes the issue of scores not saving on create game. Also adds user as a game master
       Game.findById(result._id)
         .then((game) => {
           game.highestScoreEver.name = highestScoreEverName;
@@ -115,6 +115,8 @@ exports.postAddGame = (req, res, next) => {
           game.lowestScoreEver.name = lowestScoreEverName;
           game.lowestScoreEver.score = lowestScoreEverScore;
           game.lowestScoreEver.date = lowestScoreEverDate;
+
+          game.gameMasters.push(req.user._id);
 
           return game.save().then((result) => {
             res.redirect("/game/all");
@@ -133,37 +135,37 @@ exports.postAddGame = (req, res, next) => {
     });
 };
 
-exports.postAddPlayerToGame = (req, res, next) => {
-  const gameId = req.body.gameId;
-  const playerId = req.body.playerId;
+// exports.postAddPlayerToGame = (req, res, next) => {
+//   const gameId = req.body.gameId;
+//   const playerId = req.body.playerId;
 
-  // Get game from db
-  //  If user not a game master:
-  // Error message
-  // If user is a game master:
-  // get user with playerId:
+// Get game from db
+//  If user not a game master:
+// Error message
+// If user is a game master:
+// get user with playerId:
 
-  // Add player to game as a player
+// Add player to game as a player
 
-  // Save game
-  // redirect
+// Save game
+// redirect
 
-  // const game = new Game({
-  //   name: name,
-  //   description: description,
-  //   status: status,
-  // });
-  // game
-  //   .save()
-  //   .then((result) => {
-  //     res.redirect("/games/all");
-  //   })
-  //   .catch((err) => {
-  //     const error = new Error(err);
-  //     error.httpStatusCode = 500;
-  //     return next(error);
-  //   });
-};
+// const game = new Game({
+//   name: name,
+//   description: description,
+//   status: status,
+// });
+// game
+//   .save()
+//   .then((result) => {
+//     res.redirect("/games/all");
+//   })
+//   .catch((err) => {
+//     const error = new Error(err);
+//     error.httpStatusCode = 500;
+//     return next(error);
+//   });
+// };
 
 exports.getEditGame = (req, res, next) => {
   const editMode = req.query.edit;
@@ -177,10 +179,14 @@ exports.getEditGame = (req, res, next) => {
         return res.redirect("/game/all");
       }
 
-      // TODO: check to see if the user is a game master, if not, error and redirect
-      // if (user._id.toString() not in game.gameMasters) {
-      //   return res.redirect("/games/all");
-      // }
+      // Check to see if the user is a game master, if not, redirect
+      if (
+        game.gameMasters.filter(
+          (gameMaster) => gameMaster._id.toString() === req.user._id.toString()
+        ).length !== 1
+      ) {
+        return res.redirect("/game/all");
+      }
 
       res.render("game/edit", {
         title: "Edit Game",
@@ -240,11 +246,15 @@ exports.postEditGame = (req, res, next) => {
 
   Game.findById(gameId)
     .then((game) => {
-      // TODO: Check to see if the logged in user is a game master
-      // if (game.gameMaster.userId.toString() !== req.user._id.toString()) {
-      //   return res.redirect("/");
-      // }
-      // TODO: update the object data with the form submission data
+      // Check to see if the logged in user is a game master
+      if (
+        game.gameMasters.filter(
+          (gameMaster) => gameMaster._id.toString() === req.user._id.toString()
+        ).length !== 1
+      ) {
+        return res.redirect("/game/all");
+      }
+
       game.name = updatedName;
       game.description = updatedDescription;
       game.highestScoreEver.name = updatedHighestScoreEverName;
@@ -274,8 +284,16 @@ exports.postDeleteGame = (req, res, next) => {
         return next(new Error("game not found"));
       }
 
-      // TODO: Need to modify this so that only gamemasters can delete thte game
-      return Game.deleteOne({ _id: gameId, gameMaster: req.user._id });
+      // Only a gamemaster can delete a game
+      if (
+        game.gameMasters.filter(
+          (gameMaster) => gameMaster._id.toString() === req.user._id.toString()
+        ).length === 1
+      ) {
+        return Game.deleteOne({ _id: gameId, gameMaster: req.user._id });
+      } else {
+        return res.redirect("/game/all");
+      }
     })
     .then(() => {
       res.redirect("/game/all");
