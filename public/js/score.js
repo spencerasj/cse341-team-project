@@ -69,7 +69,6 @@ class Board{
                             </div>
                             <div class="players row">
                                 <div class="player">
-                                    
                                     <div class="player__icon">
                                         <span class="fas fa-crown fa-2x"></span>
                                     </div>
