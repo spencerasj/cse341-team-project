@@ -49,7 +49,7 @@
                 />
               </div>
             </div>
-
+            
             <div>
               <label class="form-label" for="description"> Description </label>
               <div>
@@ -58,8 +58,8 @@
                 >
               
             </div>
-
-
+            
+            
             <h2>Highest Score Ever</h2>
 
             <div>
@@ -197,25 +197,35 @@
         <% } %>
 
 
-        <!-- <% if (editing) { %>
+         <% if (editing) { %>
+          <h2>Game Masters</h2>
+          <ul>  <% for (let gameMaster of game.gameMasters) { %> 
+            <li><%= gameMaster.name %> </li>
+            <% } %>
+            </ul>
           <hr />
-          <form action="/game/<%= game._id %>/add-gamemaster" method="POST">
+          <form action="/game/add-gamemaster" method="POST">
 
             <div>
               <label for="emailToAdd"> Enter an email address to add another administrator </label>
               <div>
                 <input
-                name="emailToAdd"
+                name="email"
                 id="emailToAdd"
                 type="email"
                 value=""
                 />
+                <input
+                name="gameId"
+                type="hidden"
+                value="<%= game._id %>"
+                />
               </div>
             </div>
-            
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
             <button type="submit">Add</button>
           </form>
-          <% } %> -->
+          <% } %> 
       </div>
     </main>
   </body>

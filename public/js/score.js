@@ -1,4 +1,4 @@
-//alert(games);
+//alert(user);
 
 let root = document.getElementById('app');
 
@@ -6,6 +6,7 @@ class Board{
     constructor(root){
         this.root = root;
         this.game_list = JSON.parse(game_list);
+        this.user = {};
         this.games = this.game_list;
         this.debug_title = 'Debugger';
         this.debug = '';
@@ -18,7 +19,11 @@ class Board{
     mount() {
         //alert('Mount: ' + JSON.stringify(this.game_list));
         this.debug_title = 'Game List JSON';
-        this.debug = JSON.stringify(this.game_list);
+        if(user){
+            this.user = JSON.parse(user);
+        }
+        
+        this.debug = 'User: ' + JSON.stringify(this.user) + ' Games: ' + JSON.stringify(this.game_list);
         //this.loadJson();
         //this.root.innerHTML = '<h2>Test</h2>';
         this.update();
@@ -40,7 +45,27 @@ class Board{
             temp += `
                         <div class="scoreboard">
                             <div class="row top">
-                                <h4 class="score-title"> ${game.name}</h4>
+                                <div class="score-title">`;
+                                if(game.gameMasters.indexOf(me.user._id) > -1){
+                                    temp += `
+                                    <div class="btn-group score-actions">
+                                        <a href="/game/edit/${game._id}?edit=true" class="link"><i class="fas fa-edit"></i> Edit</a>
+                                        
+                                    </div>
+                                    <h4 class="score-title-txt">
+                                        ${game.name} 
+                                    </h4>
+                                    `;
+                                } 
+                                else{
+                                    temp += `
+                                    <h4 class="score-title-full">
+                                        ${game.name}
+                                    </h4>
+                                `;
+                                } 
+                        temp += `   
+                                </div>
                             </div>
                             <div class="players row">
                                 <div class="player">

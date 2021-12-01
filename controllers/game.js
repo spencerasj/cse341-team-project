@@ -1,6 +1,6 @@
 const { validationResult } = require("express-validator");
 const Game = require("../models/game");
-
+const User = require("../models/user");
 exports.getAllGames = (req, res, next) => {
   Game.find({ gameMasters: req.user._id })
     .populate("gameMasters")
@@ -32,18 +32,22 @@ exports.getAddGame = (req, res, next) => {
 
 exports.getScoreBoard = (req, res, next) => {
   Game.find()
-    .then((games) => {
-      res.render("game/score", {
-        title: "Scoreboard",
-        path: "/game/score",
-        games: games,
-      });
-    })
-    .catch((err) => {
-      const error = new Error(err);
-      error.httpStatusCode = 500;
-      return next(error);
+  // Game.find({ players: req.user._id })
+  // .select('')
+  // .populate('userId')
+  .then((games) => {
+    res.render("game/score", {
+      title: "Scoreboard",
+      path: "/game/score",
+      games: games,
+      user: req.user
     });
+  })
+  .catch((err) => {
+    const error = new Error(err);
+    error.httpStatusCode = 500;
+    return next(error);
+  });
 };
 
 exports.postAddGame = (req, res, next) => {
@@ -174,6 +178,7 @@ exports.getEditGame = (req, res, next) => {
   }
   const gameId = req.params.gameId;
   Game.findById(gameId)
+    .populate("gameMasters")
     .then((game) => {
       if (!game) {
         return res.redirect("/game/all");
@@ -197,6 +202,74 @@ exports.getEditGame = (req, res, next) => {
         errorMessage: null,
         validationErrors: [],
       });
+    })
+    .catch((err) => {
+      const error = new Error(err);
+      error.httpStatusCode = 500;
+      return next(error);
+    });
+};
+
+exports.postAddGameMaster = (req, res, next) => {
+  const gameId = req.body.gameId;
+  const email = req.body.email;
+  const errors = validationResult(req);
+
+  if (!errors.isEmpty()) {
+    // return res.status(422).render("game/edit", {
+    //   title: "Edit Game",
+    //   path: "/game/edit",
+    //   editing: true,
+    //   hasError: true,
+    //   game: {
+    //     _id: gameId,
+    //     name: updatedName,
+    //     description: updatedDescription,
+    //     highestScoreEver: {
+    //       name: updatedHighestScoreEverName,
+    //       score: updatedHighestScoreEverScore,
+    //       date: updatedHighestScoreEverDate,
+    //     },
+    //     lowestScoreEver: {
+    //       name: updatedLowestScoreEverName,
+    //       score: updatedLowestScoreEverScore,
+    //       date: updatedLowestScoreEverDate,
+    //     },
+    //   },
+    //   errorMessage: errors.array()[0].msg,
+    //   validationErrors: errors.array(),
+    // });
+  }
+
+  Game.findById(gameId)
+    .then((game) => {
+      // Check to see if the logged in user is a game master
+      if (
+        game.gameMasters.filter(
+          (gameMaster) => gameMaster._id.toString() === req.user._id.toString()
+        ).length !== 1
+      ) {
+        return res.redirect("/game/all");
+      }
+
+  User.findOne({ email: email })
+    .then((user) => {
+      if (!user) {
+        //Error no user found
+      }
+      game.gameMasters.push(user._id);
+      return game.save().then((result) => {
+        res.redirect("/game/edit/" + game._id);
+      });
+    })
+    .catch((err) => {
+      const error = new Error(err);
+      error.httpStatusCode = 500;
+      return next(error);
+    });
+      // return game.save().then((result) => {
+      //   res.redirect("/game/all");
+      // });
     })
     .catch((err) => {
       const error = new Error(err);
