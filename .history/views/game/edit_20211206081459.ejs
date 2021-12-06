@@ -29,7 +29,7 @@
           action="/game/<% if (editing) { %>edit<% } else { %>add<% } %>"
         >
           <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
-            <div class="mb-3">
+            <div>
               <label
                 for="title"
                 class="form-label"
@@ -50,7 +50,7 @@
               </div>
             </div>
             
-            <div class="mb-3">
+            <div>
               <label class="form-label" for="description"> Description </label>
               <div>
                 <textarea class="form-control" required id="description" name="description" rows="3">
@@ -62,8 +62,8 @@
             
             <h2>Highest Score Ever</h2>
 
-            <div class="mb-3" >
-              <label class="form-label"
+            <div>
+              <label
                 for="highestScoreEverName"
               >
                 Player
@@ -82,9 +82,8 @@
               </div>
             </div>
 
-            <div class="mb-3">
+            <div>
               <label
-              class="form-label"
                 for="highestScoreEverScore"
               >
                 Score
@@ -92,7 +91,6 @@
               <div>
                 <input
                   required
-                  class="form-control"
                   type="number"
                   name="highestScoreEverScore"
                   id="highestScoreEverScore"
@@ -102,9 +100,8 @@
               </div>
             </div>
 
-            <div class="mb-3">
+            <div>
               <label
-              class="form-label"
                 for="highestScoreEverDate"
               >
                 Date
@@ -112,7 +109,6 @@
               <div>
                 <input
                   required
-                  class="form-control"
                   type="text"
                   name="highestScoreEverDate"
                   id="highestScoreEverDate"
@@ -125,16 +121,14 @@
 
             <h2>Lowest Score Ever</h2>
 
-            <div class="mb-3">
+            <div>
               <label
-              class="form-label"
                 for="lowestScoreEverName"
               >
                 Player
               </label>
               <div>
                 <input
-                class="form-control"
                   required
                   type="text"
                   name="lowestScoreEverName"
@@ -145,9 +139,8 @@
               </div>
             </div>
 
-            <div class="mb-3">
+            <div>
               <label
-              class="form-label"
                 for="lowestScoreEverScore"
               >
                 Score
@@ -155,7 +148,6 @@
               <div>
                 <input
                   required
-                  class="form-control"
                   type="number"
                   name="lowestScoreEverScore"
                   id="lowestScoreEverScore"
@@ -165,9 +157,8 @@
               </div>
             </div>
 
-            <div class="mb-3">
+            <div>
               <label
-              class="form-label"
                 for="lowestScoreEverDate"
               >
                 Date
@@ -175,7 +166,6 @@
               <div>
                 <input
                   required
-                  class="form-control"
                   type="text"
                   name="lowestScoreEverDate"
                   id="lowestScoreEverDate"
@@ -189,7 +179,7 @@
             <input type="hidden" name="gameId" value="<%= game._id %>" />
             <% } %>
 
-            <div class="mb-3">
+            <div>
               <button class="btn btn-primary" type="submit">
                 <% if (editing) { %>Update<% } else { %>Add<% } %> Game
               </button>
@@ -206,7 +196,7 @@
         </form>
         <% } %>
 
-<hr>
+
          <% if (editing) { %>
           <h2>Game Masters</h2>
           <ul>  <% for (let gameMaster of game.gameMasters) { %> 
@@ -216,11 +206,10 @@
           <hr />
           <form action="/game/add-gamemaster" method="POST">
 
-            <div class="mb-3">
-              <label class="form-label" for="emailToAdd"> Enter an email address to add another administrator </label>
+            <div>
+              <label for="emailToAdd"> Enter an email address to add another administrator </label>
               <div>
                 <input
-                class="form-control"
                 name="email"
                 id="emailToAdd"
                 type="email"
@@ -234,7 +223,7 @@
               </div>
             </div>
             <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
-            <button class="btn btn-primary" type="submit">Add</button>
+            <button type="submit">Add</button>
           </form>
           <% } %> 
       </div>

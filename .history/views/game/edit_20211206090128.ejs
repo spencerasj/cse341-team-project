@@ -92,7 +92,6 @@
               <div>
                 <input
                   required
-                  class="form-control"
                   type="number"
                   name="highestScoreEverScore"
                   id="highestScoreEverScore"
@@ -112,7 +111,6 @@
               <div>
                 <input
                   required
-                  class="form-control"
                   type="text"
                   name="highestScoreEverDate"
                   id="highestScoreEverDate"
@@ -134,7 +132,6 @@
               </label>
               <div>
                 <input
-                class="form-control"
                   required
                   type="text"
                   name="lowestScoreEverName"
@@ -155,7 +152,6 @@
               <div>
                 <input
                   required
-                  class="form-control"
                   type="number"
                   name="lowestScoreEverScore"
                   id="lowestScoreEverScore"
@@ -175,7 +171,6 @@
               <div>
                 <input
                   required
-                  class="form-control"
                   type="text"
                   name="lowestScoreEverDate"
                   id="lowestScoreEverDate"
@@ -206,7 +201,7 @@
         </form>
         <% } %>
 
-<hr>
+
          <% if (editing) { %>
           <h2>Game Masters</h2>
           <ul>  <% for (let gameMaster of game.gameMasters) { %> 
@@ -216,11 +211,10 @@
           <hr />
           <form action="/game/add-gamemaster" method="POST">
 
-            <div class="mb-3">
+            <div>
               <label class="form-label" for="emailToAdd"> Enter an email address to add another administrator </label>
               <div>
                 <input
-                class="form-control"
                 name="email"
                 id="emailToAdd"
                 type="email"
@@ -234,7 +228,7 @@
               </div>
             </div>
             <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
-            <button class="btn btn-primary" type="submit">Add</button>
+            <button type="submit">Add</button>
           </form>
           <% } %> 
       </div>

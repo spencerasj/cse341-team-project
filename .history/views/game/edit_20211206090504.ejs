@@ -206,7 +206,7 @@
         </form>
         <% } %>
 
-<hr>
+
          <% if (editing) { %>
           <h2>Game Masters</h2>
           <ul>  <% for (let gameMaster of game.gameMasters) { %> 
@@ -216,7 +216,7 @@
           <hr />
           <form action="/game/add-gamemaster" method="POST">
 
-            <div class="mb-3">
+            <div>
               <label class="form-label" for="emailToAdd"> Enter an email address to add another administrator </label>
               <div>
                 <input

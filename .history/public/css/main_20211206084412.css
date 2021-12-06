@@ -95,14 +95,20 @@ li {
   color: #046865;
 }
 .game-image {
-  background-image: url(../images/all-game-image.jpg);
-  /* background-image: url(../images/all-game-image-large.jpg); */
+  background-image: url(../images/all-game-image-large.jpg);
+  /* background-size: contain;
+  background-repeat: no-repeat;
+  height: 20vh; */
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center;
 }
 .main-404 {
-  background-image: url(../images/404.jpg);
+  background-image: url(../images/404-small.jpg);
+  /* background-size: cover;
+  height: 100vh;
+  overflow: hidden; */
+  /* background-position-x: 50%; */
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center;
@@ -124,6 +130,11 @@ footer {
 footer p {
   padding: 2em;
 }
+/* @media (min-width: 550px) {
+  .main-404 {
+    background-image: url("../images/404.jpg");
+  }
+} */
 
 @media (min-width: 600px) {
   title {

@@ -1,3 +1,4 @@
+
 * {
   box-sizing: border-box;
 }
@@ -12,6 +13,8 @@ main {
   margin: 0;
   height: 100vh;
 }
+
+
 
 h1,
 h2,
@@ -35,20 +38,12 @@ li {
 .navbar .nav-link {
   color: white;
 }
-/* .title {
+.title {
   background-image: url("../images/mario.jpg");
   background-position-x: -50px;
   background-position-y: 25%;
   background-size: cover;
   align-items: center;
-} */
-.title {
-  padding: 0;
-  margin: 0;
-  background-image: url("../images/mario.jpg");
-  background-repeat: no-repeat;
-  background-size: contain;
-  background-position: center;
 }
 
 .title h1 {
@@ -95,27 +90,25 @@ li {
   color: #046865;
 }
 .game-image {
-  background-image: url(../images/all-game-image.jpg);
-  /* background-image: url(../images/all-game-image-large.jpg); */
-  background-repeat: no-repeat;
+  background-image: url(../images/all-game-image-large.jpg);
   background-size: contain;
-  background-position: center;
+  background-repeat: no-repeat;
+  height: 20vh;
 }
 .main-404 {
-  background-image: url(../images/404.jpg);
-  background-repeat: no-repeat;
-  background-size: contain;
-  background-position: center;
+  background-image: url(../images/404-small.jpg);
+  background-size: cover;
+  height: 100vh;
+  overflow: hidden;
+  /* background-position-x: 50%; */
 }
-
 .main-500 {
   background-image: url(../images/500-page.jpg);
+  background-size: cover;
   height: 100vh;
-  background-repeat: no-repeat;
-  background-size: contain;
-  background-position: center;
+  overflow: hidden;
+  /* background-position-x: 50%; */
 }
-
 footer {
   background-color: #d7263d;
   color: white;
@@ -123,6 +116,11 @@ footer {
 }
 footer p {
   padding: 2em;
+}
+@media (min-width: 550px) {
+  .main-404 {
+    background-image: url("../images/404.jpg");
+  }
 }
 
 @media (min-width: 600px) {
