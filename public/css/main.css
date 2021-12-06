@@ -35,27 +35,25 @@ li {
 .navbar .nav-link {
   color: white;
 }
-/* .title {
-  background-image: url("../images/mario.jpg");
-  background-position-x: -50px;
-  background-position-y: 25%;
-  background-size: cover;
-  align-items: center;
-} */
+
 .title {
-  padding: 0;
-  margin: 0;
+  position: relative;
   background-image: url("../images/mario.jpg");
   background-repeat: no-repeat;
-  background-size: contain;
+  background-size: cover;
   background-position: center;
+  height: 30vh;
 }
 
 .title h1 {
+  position: absolute;
+  right: 5%;
+  top: 25%;
+  width: 55%;
   text-align: right;
   color: white;
   font-size: 12.5vw;
-  padding: 5% 10% 10% 50%;
+  line-height: 0.75;
 }
 .error-message {
   padding: 1rem;
@@ -94,12 +92,13 @@ li {
 .signup-page a {
   color: #046865;
 }
+
 .game-image {
-  background-image: url(../images/all-game-image.jpg);
-  /* background-image: url(../images/all-game-image-large.jpg); */
+  background-image: url(../images/all-game-image-large.jpg);
   background-repeat: no-repeat;
-  background-size: contain;
+  background-size: cover;
   background-position: center;
+  height: 30vh;
 }
 .main-404 {
   background-image: url(../images/404.jpg);
@@ -125,8 +124,23 @@ footer p {
   padding: 2em;
 }
 
-@media (min-width: 600px) {
-  title {
+@media (min-width: 700px) {
+  .login-page,
+  .signup-page,
+  .all-games-page,
+  .edit-all-games,
+  .reset-page {
+    margin: 3% 25%;
+  }
+  .title {
     height: 35vh;
+  }
+  .title h1 {
+    top: 10%;
+  }
+}
+@media (min-width: 800px) {
+  .title h1 {
+    top: 2.5%;
   }
 }
