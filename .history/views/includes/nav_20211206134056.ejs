@@ -69,16 +69,7 @@
         <li class="nav-item">
           <form action="/auth/logout" method="POST">
             <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
-            <button
-              class="btn btn-primary"
-              style="
-                background-color: #046865;
-                border-color: #046865;
-                font-family: 'Poppins', sans-serif;
-              "
-            >
-              Logout
-            </button>
+            <button class="btn btn-primary">Logout</button>
           </form>
         </li>
         <% } %>

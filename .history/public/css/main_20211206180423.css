@@ -100,12 +100,10 @@ li {
   margin: 0;
 }
 .homepage {
-  background-color: rgba(4, 104, 101, 1);
-  z-index: -2;
+  background-color: rgba(4, 104, 101, 0.5);
 }
 .homepage section {
   padding: 0 2rem;
-  z-index: 1;
 }
 
 .game-info {
@@ -122,9 +120,7 @@ li {
 .game-info-item img {
   width: 100%;
 }
-#app {
-  background-color: rgba(4, 104, 101, 1);
-}
+
 .game-image {
   background-image: url(../images/all-game-image-large.jpg);
   background-repeat: no-repeat;
