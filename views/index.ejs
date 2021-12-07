@@ -9,15 +9,15 @@
         <%- include('./includes/nav.ejs') %>
       </div>
     </div>
+    <div class="row title">  
+      <h1><%= title %></h1>
+  </div>
   <main class="homepage">
-      <div class="row title">      
-        <h1>
-          <%= title %>
-        </h1>
-      </div>
+       
       <section class="container-fluid">
         <div class="row game-info">
-          <div class="column">
+          <div class="col game-info-item">
+            <p></p>
           <ul>
             <li>Like to play games?</li>
             <li>Add your favorite game playing family and friends to a group</li>
@@ -26,13 +26,15 @@
             <li>Fight to beat the previous scores</li>
           </ul>
           </div>
-          <div class="column"></div>
+          <div class="col game-info-item"> 
+            <img src="/images/scoreboard.jpg" alt="scoreboard example">          </div>
+          
         </div>
       </section>
       </main>
-    <div class="row">
+
       <%- include('./includes/footer.ejs') %>
-    </div>
+      
   </body>
    <!-- <dib class="row"> -->
         

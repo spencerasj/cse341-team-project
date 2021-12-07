@@ -1,0 +1,168 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  padding: 0;
+  margin: 0;
+}
+
+main {
+  padding: 0;
+  margin: 0;
+  height: 100vh;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Road Rage", cursive;
+}
+
+p,
+a,
+li {
+  font-family: "Poppins", sans-serif;
+}
+
+.navbar {
+  background-color: #d7263d;
+  text-align: left;
+}
+nav .navbar-expand-lg .navbar-nav .nav-link {
+  color: white;
+}
+.bar1,
+.bar2,
+.bar3 {
+  width: 35px;
+  height: 5px;
+  background-color: #333;
+  margin: 6px 0;
+  transition: 0.4s;
+}
+
+.change .bar1 {
+  -webkit-transform: rotate(-45deg) translate(-9px, 6px);
+  transform: rotate(-45deg) translate(-9px, 6px);
+}
+
+.change .bar2 {
+  opacity: 0;
+}
+
+.change .bar3 {
+  -webkit-transform: rotate(45deg) translate(-8px, -8px);
+  transform: rotate(45deg) translate(-8px, -8px);
+}
+.title {
+  position: relative;
+  background-image: url("../images/mario.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  height: 30vh;
+}
+
+.title h1 {
+  position: absolute;
+  right: 5%;
+  top: 25%;
+  width: 55%;
+  text-align: right;
+  color: white;
+  font-size: 12.5vw;
+  line-height: 0.75;
+}
+.error-message {
+  padding: 1rem;
+  margin-bottom: 2rem;
+  border: 2px solid #ffe900;
+}
+.error-title {
+  font-size: 1em;
+  font-family: "Poppins", sans-serif;
+  text-align: center;
+  color: #d7263d;
+}
+.error-list {
+  list-style-type: none;
+  font-size: 1em;
+  padding: 0;
+  margin: 0;
+}
+.game-info {
+  margin: 0 auto;
+}
+
+.login-page,
+.signup-page,
+.all-games-page,
+.edit-all-games,
+.reset-page {
+  margin: 2rem;
+}
+.login-div h2,
+.signup-div h2 {
+  font-size: 3em;
+  line-height: 0.75;
+}
+.login-page a,
+.signup-page a {
+  color: #046865;
+}
+
+.game-image {
+  background-image: url(../images/all-game-image-large.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  height: 30vh;
+}
+.main-404 {
+  background-image: url(../images/404.jpg);
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+}
+
+.main-500 {
+  background-image: url(../images/500-page.jpg);
+  height: 100vh;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+}
+
+footer {
+  background-color: #d7263d;
+  color: white;
+  margin: 0;
+}
+footer p {
+  padding: 2em;
+}
+
+@media (min-width: 700px) {
+  .login-page,
+  .signup-page,
+  .all-games-page,
+  .edit-all-games,
+  .reset-page {
+    margin: 3% 25%;
+  }
+  .title {
+    height: 35vh;
+  }
+  .title h1 {
+    top: 10%;
+  }
+}
+@media (min-width: 800px) {
+  .title h1 {
+    top: 2.5%;
+  }
+}
