@@ -219,11 +219,13 @@ exports.postReset = (req, res, next) => {
         transporter.sendMail({
           to: req.body.email,
           from: process.env.FROM_EMAIL,
-          subject: "Password Reset",
+          subject: "Beat That! Password Reset",
           html: `
-          <p>You requested a password reset</p>
+          <p>If you did not request to reset your password you can disregard this email.</p>
 
-          <p>Please use this link, or copy and paste it into a browser <a href="${process.env.PROJECT_URL}/auth/reset/${token}">${process.env.PROJECT_URL}auth/reset/${token}</a> to set a new password</p>
+          <p>Please use this link below, or copy and paste it into your browser, in order to reset your password.</p>
+
+          <a href="${process.env.PROJECT_URL}/auth/reset/${token}">${process.env.PROJECT_URL}/auth/reset/${token}</a>
           
        `,
         });
