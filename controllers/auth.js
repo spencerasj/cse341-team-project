@@ -223,7 +223,7 @@ exports.postReset = (req, res, next) => {
           html: `
           <p>You requested a password reset</p>
 
-          <p>Click this <a href="${process.env.PROJECT_URL}/auth/reset/${token}">link</a> to set a new password</p>
+          <p>Please use this link, or copy and paste it into a browser <a href="${process.env.PROJECT_URL}/auth/reset/${token}">${process.env.PROJECT_URL}auth/reset/${token}</a> to set a new password</p>
           
        `,
         });
