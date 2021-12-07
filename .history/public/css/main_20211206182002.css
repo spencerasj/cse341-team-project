@@ -169,8 +169,6 @@ footer p {
   .title h1 {
     top: 10%;
   }
-}
-@media (min-width: 1000px) {
   .game-info-item {
     margin: 0 3rem;
   }
@@ -179,9 +177,6 @@ footer p {
     flex-wrap: wrap;
     align-items: center;
     padding-top: 2rem;
-  }
-  .game-info .col {
-    flex: 1 0 0%;
   }
 }
 /* @media (min-width: 800px) {
