@@ -50,7 +50,8 @@ li {
 .signup-page,
 .all-games-page,
 .edit-all-games,
-.reset-page {
+.reset-page,
+.new-password {
   margin: 2rem;
 }
 .login-div h2,
@@ -160,7 +161,8 @@ footer p {
   .signup-page,
   .all-games-page,
   .edit-all-games,
-  .reset-page {
+  .reset-page,
+  .new-password {
     margin: 3% 25%;
   }
   .title {
