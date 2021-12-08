@@ -109,15 +109,16 @@
               >
                 Date
               </label>
+
               <div>
                 <input
                   required
                   class="form-control"
-                  type="text"
+                  type="date"
                   name="highestScoreEverDate"
                   id="highestScoreEverDate"
                   value="<% if
-                  (editing || hasError) { %><%= game.highestScoreEver.date %><% } %>"
+                  (editing || hasError) { %><%= game.highestScoreEver.date.getFullYear() %>-<% if (game.highestScoreEver.date.getMonth() < 9) { %>0<% } %><%= game.highestScoreEver.date.getMonth() + 1 %>-<% if (game.highestScoreEver.date.getDate() < 9) { %>0<% } %><%= game.highestScoreEver.date.getDate() + 1 %><% } %>"
                 />
               </div>
             </div>
@@ -172,15 +173,16 @@
               >
                 Date
               </label>
+
               <div>
                 <input
                   required
                   class="form-control"
-                  type="text"
+                  type="date"
                   name="lowestScoreEverDate"
                   id="lowestScoreEverDate"
                   value="<% if
-                  (editing || hasError) { %><%= game.lowestScoreEver.date %><% } %>"
+                  (editing || hasError) { %><%= game.lowestScoreEver.date.getFullYear() %>-<% if (game.lowestScoreEver.date.getMonth() < 9) { %>0<% } %><%= game.lowestScoreEver.date.getMonth() + 1 %>-<% if (game.lowestScoreEver.date.getDate() < 9) { %>0<% } %><%= game.lowestScoreEver.date.getDate() + 1 %><% } %>"
                 />
               </div>
             </div>
