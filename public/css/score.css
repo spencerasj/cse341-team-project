@@ -57,7 +57,7 @@ overflow-y: auto;}
 .bottom{border-top: 1px solid #cbccce; padding-top: 10px;
 padding-bottom: 10px;}
 
-
+button.link{padding: 0px; border: none; background: none;}
 
 .title-cont{}
 
@@ -69,3 +69,5 @@ padding-bottom: 10px;}
 
 .red{color: red;}
 .green{color: green;}
+.masters{list-style: none; padding-left: 0px;}
+.section-title{padding: 10px; font-weight: bold; text-decoration: underline;}

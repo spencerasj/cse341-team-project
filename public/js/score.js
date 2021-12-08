@@ -11,7 +11,9 @@ class Board{
         this.debug_title = 'Debugger';
         this.debug = '';
         this.show_debug = false;
+        this.csrf = '';
         this.admin = false;
+        this.loaded = false;
         this.status = [];
         this.template = '';
         this.mount();
@@ -26,17 +28,77 @@ class Board{
         this.debug = 'User: ' + JSON.stringify(this.user) + ' Games: ' + JSON.stringify(this.game_list);
         //this.loadJson();
         //this.root.innerHTML = '<h2>Test</h2>';
+        this.csrf = document.getElementById('_csrf').value;
         this.update();
+    }
+    deleteGame(lnk){
+        let id = lnk.dataset.game;
+        //let csrf = document.getElementById('_csrf').value;
+        fetch('/game/update/score', {
+            method: 'POST',
+            headers: {
+                'gameId': id
+            }
+            //            'csrf-token': csrf
+          })
+            .then(result => {
+              return result.json();
+            })
+            .then(data => {
+                me.debug = data;
+               // me.game_list = data;
+                //me.games = data;
+                //me.update();
+              //console.log(data);
+              //alert(JSON.stringify(data));
+              //productElement.parentNode.removeChild(productElement);
+            })
+            .catch(err => {
+              console.log(err);
+            });
+    }
+    checkScores(app){
+        let me = app;
+        if(this.loaded == false){
+            this.loaded = true;
+        }
+        else{
+            fetch('/game/update/score', {
+                method: 'GET',
+                /*headers: {
+                  'csrf-token': csrf
+                }*/
+              })
+                .then(result => {
+                  return result.json();
+                })
+                .then(data => {
+                    me.debug = data;
+                    me.game_list = data;
+                    me.games = data;
+                    me.update();
+                  //console.log(data);
+                  //alert(JSON.stringify(data));
+                  //productElement.parentNode.removeChild(productElement);
+                })
+                .catch(err => {
+                  console.log(err);
+                });
+        }
+        
     }
     update(){
         //let temp = this.template;
         let games = this.games;
+
         //alert(games[1].name);
         let me = this;
         let temp = `
             <div class="container">
                 <div class="row">
-                    
+                    <div class="tool-bar">
+                        
+                    </div>
                 </div>
                 <div class="row">
                     <div class="board-cont">
@@ -46,17 +108,35 @@ class Board{
                         <div class="scoreboard">
                             <div class="row top">
                                 <div class="score-title">`;
-                                if(game.gameMasters.indexOf(me.user._id) > -1){
+                                let user_match = false;
+                                if(game.gameMasters.length > 0){
+                                    
+                                    game.gameMasters.forEach(function(master){
+                                        //alert(master._id);
+                                        if(master._id == me.user._id){
+                                            user_match = true;
+                                        }
+                                    });
+                                }
+                                if(user_match == true){
                                     temp += `
-                                    <div class="btn-group score-actions">
-                                        <a href="/game/edit/${game._id}?edit=true" class="link"><i class="fas fa-edit"></i> Edit</a>
-                                        
-                                    </div>
-                                    <h4 class="score-title-txt">
-                                        ${game.name} 
-                                    </h4>
-                                    `;
-                                } 
+                                        <div class="btn-group score-actions">
+                                            <a href="/game/add" class="link"><i class="fas fa-plus green"></i></a>
+                                            <a href="/game/edit/${game._id}?edit=true" class="link"><i class="fas fa-edit green"></i></a>
+                                            <form action="/game/delete" method="POST">
+                                                <input type="hidden" name="_csrf" value="${me.csrf}" />
+                                                <input type="hidden" name="gameId" value="${game._id}" />
+                                                <button class="link" type="submit" onclick="return confirm('Are you sure you want to delete this game?');"><i class="fas fa-times red"></i></button>
+                                            </form>
+                                            <!-- <a data-game="" class="link link-delete"><i class="fas fa-times red"></i></a>-->
+                                        </div>
+                                        `;
+                                    
+                                    temp += `   <h4 class="score-title-txt">
+                                                    ${game.name} 
+                                                </h4>
+                                                `;
+                                }
                                 else{
                                     temp += `
                                     <h4 class="score-title-full">
@@ -64,6 +144,7 @@ class Board{
                                     </h4>
                                 `;
                                 } 
+                                
                         temp += `   
                                 </div>
                             </div>
@@ -97,10 +178,25 @@ class Board{
                                     </div>
                                 </div> 
                             </div>
-                            <div class="row bottom">            
+                            <div class="row bottom"> 
+                                <label class="section-title">Description</label>           
                                 <div class="note col-md-12">
                                     ${game.description}
                                 </div>
+                            </div>
+                            <div class="row bottom">
+                                <label class="section-title">Game Masters</label> 
+                                <div class="game-masters col-md-12">
+                                    <ul class="masters">
+                                `;
+
+                                    game.gameMasters.forEach(function(master){
+                                        temp += `
+                                            <li>${master.name}</li>
+                                        `;
+                                    });
+                            temp +=  `   </ul>
+                               </div>
                             </div>
                         </div>
                     `;
@@ -122,7 +218,7 @@ class Board{
         temp += `</div>`;
                       
         this.root.innerHTML = temp;
-        this.setHandlers('.expand-card');
+        this.setHandlers('.link-delete', 'delete');
         
         /*document.addEventListener('change', function(){
             let chk = event.target;
@@ -150,14 +246,31 @@ class Board{
         
         return str;
     }
-    setHandlers(els){
+    setHandlers(els, action){
         let me = this;
         let ctrls = root.querySelectorAll(els);
-        ctrls.forEach(function(ctrl){
-            ctrl.addEventListener('click', function(event){
+
+        switch(action){
+            case 'delete':
+                ctrls.forEach(function(ctrl){
+                    ctrl.addEventListener('click', function(event){
+                        let lnk = event.target;
+                        let p = lnk.parentNode;
+                        if(lnk.tagName == 'I'){
+                            lnk = p;
+                        }
+                        //alert(p.tagName);
+                        me.deleteGame(p);
+                        
+                    });
+                });
+                
+                break;
+            case 'link-expand':
                 me.showGameBoard(event);
-            });
-        });
+                break;
+        }
+        
 
     }
     loadOptions(list, selected){
@@ -250,5 +363,9 @@ class Board{
 }
 
   const app = new Board(root);
+  setInterval(function(){
+      app.checkScores(app);
+    }, 5000);
+ 
 
  

@@ -7,6 +7,7 @@ const router = express.Router();
 
 router.get("/all", isAuth, gameController.getAllGames);
 router.get("/score", gameController.getScoreBoard);
+router.get("/update/score", gameController.getUpdateScoreBoard);
 
 router.get("/add", isAuth, gameController.getAddGame);
 router.post(
@@ -56,5 +57,6 @@ router.post(
   gameController.postEditGame
 );
 router.post("/delete", isAuth, gameController.postDeleteGame);
+router.post("/delete/score", isAuth, gameController.postScoreDeleteGame);
 
 module.exports = router;
