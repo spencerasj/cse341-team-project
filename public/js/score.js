@@ -57,6 +57,14 @@ class Board{
               console.log(err);
             });
     }
+    fixDate(dte){
+            console.log(dte);
+            let dte2 = dte.split('T');
+            dte2 = dte2[0].split('-');
+            
+            dte = dte2[1] + '/' + dte2[2] + '/' + dte2[0];
+        return dte;
+    }
     checkScores(app){
         let me = app;
         if(this.loaded == false){
@@ -154,7 +162,7 @@ class Board{
                                         <span class="fas fa-crown fa-2x"></span>
                                     </div>
                                     <div class="player__date">
-                                        <span class="date-cont"> ${new Date(game.highestScoreEver?.date).toLocaleDateString()}</span>
+                                        <span class="date-cont"> ${me.fixDate(game?.highestScoreEver.date)}</span>
                                     </div>
                                     <div class="player__name">
                                         ${game.highestScoreEver?.name}
@@ -168,7 +176,7 @@ class Board{
                                         <span class="fas fa-thumbs-down fa-2x"></span>
                                     </div>
                                     <div class="player__date">
-                                        ${new Date(game.lowestScoreEver?.date).toLocaleDateString()}
+                                        ${me.fixDate(game?.lowestScoreEver.date)}
                                     </div>
                                     <div class="player__name">
                                         ${game.lowestScoreEver?.name}
