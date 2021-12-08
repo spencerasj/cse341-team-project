@@ -420,11 +420,11 @@ exports.postScoreDeleteGame = (req, res, next) => {
       ) {
         return Game.deleteOne({ _id: gameId, gameMaster: req.user._id });
       } else {
-        return res.redirect("/score");
+        return res.redirect("/game/score");
       }
     })
     .then(() => {
-      res.redirect("/score");
+      res.redirect("/game/score");
     })
     .catch((err) => {
       const error = new Error(err);

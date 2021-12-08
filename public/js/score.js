@@ -123,7 +123,7 @@ class Board{
                                         <div class="btn-group score-actions">
                                             <a href="/game/add" class="link"><i class="fas fa-plus green"></i></a>
                                             <a href="/game/edit/${game._id}?edit=true" class="link"><i class="fas fa-edit green"></i></a>
-                                            <form action="/game/delete" method="POST">
+                                            <form action="/game/delete/score" method="POST">
                                                 <input type="hidden" name="_csrf" value="${me.csrf}" />
                                                 <input type="hidden" name="gameId" value="${game._id}" />
                                                 <button class="link" type="submit" onclick="return confirm('Are you sure you want to delete this game?');"><i class="fas fa-times red"></i></button>
