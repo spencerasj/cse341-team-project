@@ -1,6 +1,7 @@
 const { validationResult } = require("express-validator");
 const Game = require("../models/game");
 const User = require("../models/user");
+
 exports.getAllGames = (req, res, next) => {
   Game.find({ gameMasters: req.user._id })
     .populate("gameMasters")
@@ -32,10 +33,21 @@ exports.getAddGame = (req, res, next) => {
 
 exports.getScoreBoard = (req, res, next) => {
   Game.find()
-  // Game.find({ players: req.user._id })
+  .populate({path: "gameMasters", select: "_id, name"})
   // .select('')
   // .populate('userId')
   .then((games) => {
+    //let new_games = [];
+  /*  games.forEach(function(game){
+      let gameMasters = [];
+      game.gameMasters.forEach(function(master){
+        let ga = {};
+        ga._id = master._id;
+        ga.name = master.name;
+        gameMasters.push(ga);
+      });
+     // game.gameMasters = gameMasters;
+    }); */
     res.render("game/score", {
       title: "Scoreboard",
       path: "/game/score",
@@ -47,6 +59,20 @@ exports.getScoreBoard = (req, res, next) => {
     const error = new Error(err);
     error.httpStatusCode = 500;
     return next(error);
+  });
+};
+
+exports.getUpdateScoreBoard = (req, res, next) => {
+  Game.find()
+  .populate({path: "gameMasters", select: "_id, name"})
+  // Game.find({ players: req.user._id })
+  // .select('')
+  // .populate('userId')
+  .then((games) => {
+    res.status(200).json(games);
+  })
+  .catch((err) => {
+    res.status(500).json({'message': 'Something went wrong'});
   });
 };
 
@@ -377,3 +403,57 @@ exports.postDeleteGame = (req, res, next) => {
       return next(error);
     });
 };
+
+exports.postScoreDeleteGame = (req, res, next) => {
+  const gameId = req.body.gameId;
+  Game.findById(gameId)
+    .then((game) => {
+      if (!game) {
+        return next(new Error("game not found"));
+      }
+
+      // Only a gamemaster can delete a game
+      if (
+        game.gameMasters.filter(
+          (gameMaster) => gameMaster._id.toString() === req.user._id.toString()
+        ).length === 1
+      ) {
+        return Game.deleteOne({ _id: gameId, gameMaster: req.user._id });
+      } else {
+        return res.redirect("/game/score");
+      }
+    })
+    .then(() => {
+      res.redirect("/game/score");
+    })
+    .catch((err) => {
+      const error = new Error(err);
+      error.httpStatusCode = 500;
+      return next(error);
+    });
+/*
+  Game.findById(gameId)
+    .then((game) => {
+      if (!game) {
+        res.status(500).json({'reuslt': 0,'message': 'No game by that id'});
+      }
+
+      // Only a gamemaster can delete a game
+      if (
+        game.gameMasters.filter(
+          (gameMaster) => gameMaster._id.toString() === req.user._id.toString()
+        ).length === 1
+      ) {
+        return Game.deleteOne({ _id: gameId, gameMaster: req.user._id });
+      } else {
+        res.status(200).json({'reuslt': 1,'message': 'Game was deleted successfully'});
+      }
+    })
+    .then(() => {
+      res.status(200).json({'reuslt': 1,'message': 'Game was deleted successfully'});
+    })
+    .catch((err) => {
+      res.status(500).json({'reuslt': 0,'message': 'Something went wrong with the delete function'});
+    }); */
+};
+

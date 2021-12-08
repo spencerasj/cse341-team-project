@@ -193,12 +193,13 @@
               <button class="btn btn-primary" type="submit">
                 <% if (editing) { %>Update<% } else { %>Add<% } %> Game
               </button>
+              <a href="/game/all" class="btn btn-warning">Cancel</a>
             </div>
           <!-- </div> -->
         </form>
 
         <% if (editing) { %>
-        <form action="/game/delete" method="POST">
+        <form action="/game/delete" method="POST" class="delete-frm">
           <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
           <input type="hidden" name="gameId" value="<%= game._id %>" />
 

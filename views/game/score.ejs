@@ -9,7 +9,8 @@
     <link rel="stylesheet" type="text/css" href="/css/score.css" />
       <script>
          const game_list = '<%- JSON.stringify(games) %>';  
-         const user = '<%- JSON.stringify(user) %>';         
+         const user = '<%- JSON.stringify(user) %>';    
+         const csrf = '<%- JSON.stringify(user) %>';        
       </script>
  
   </head>
@@ -19,7 +20,7 @@
     <div id="app">
      
     </div>
-    
+    <input type="hidden" name="_csrf" id="_csrf" value="<%= csrfToken %>" />
 
     <%- include('../includes/footer.ejs') %>
     
