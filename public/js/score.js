@@ -154,13 +154,13 @@ class Board{
                                         <span class="fas fa-crown fa-2x"></span>
                                     </div>
                                     <div class="player__date">
-                                        <span class="date-cont"> ${new Date(game.highestScoreEver.date).toLocaleDateString()}</span>
+                                        <span class="date-cont"> ${new Date(game.highestScoreEver?.date).toLocaleDateString()}</span>
                                     </div>
                                     <div class="player__name">
-                                        ${game.highestScoreEver.name}
+                                        ${game.highestScoreEver?.name}
                                     </div>
                                     <div class="player__total">
-                                        ${game.highestScoreEver.score}
+                                        ${game.highestScoreEver?.score}
                                     </div>
                                 </div>
                                 <div class="player loser">
@@ -168,13 +168,13 @@ class Board{
                                         <span class="fas fa-thumbs-down fa-2x"></span>
                                     </div>
                                     <div class="player__date">
-                                        ${new Date(game.lowestScoreEver.date).toLocaleDateString()}
+                                        ${new Date(game.lowestScoreEver?.date).toLocaleDateString()}
                                     </div>
                                     <div class="player__name">
-                                        ${game.lowestScoreEver.name}
+                                        ${game.lowestScoreEver?.name}
                                     </div>
                                     <div class="player__total">
-                                        ${game.lowestScoreEver.score}
+                                        ${game.lowestScoreEver?.score}
                                     </div>
                                 </div> 
                             </div>

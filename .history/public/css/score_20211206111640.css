@@ -1,0 +1,122 @@
+.debug {
+  margin-top: 30px;
+}
+.debug h3 {
+  text-align: center;
+  border-bottom: 2px solid black;
+  padding-bottom: 20px;
+}
+.debug textarea {
+  height: 150px;
+}
+.board-cont {
+  margin-top: 20px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: auto;
+  /*display: flex;
+  justify-content: center;
+  align-items: center;*/
+  background: white;
+}
+
+.link:hover {
+  cursor: pointer;
+}
+
+.scoreboard {
+  border: 1px solid #cbccce;
+  background: #fff;
+}
+
+.scoreboard .row {
+  margin: 0px;
+}
+
+.top {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border: 1px solid #cbccce;
+}
+.top .score-actions {
+  width: 20%;
+  float: left;
+  margin-right: 10px;
+}
+.top .score-actions a {
+  margin-right: 10px;
+}
+
+.top .score-title-txt {
+  float: left;
+  width: 75%;
+}
+.top .score-title-full {
+  width: 100%;
+}
+
+.players {
+  padding: none;
+  max-height: 300px;
+  overflow-y: auto;
+}
+.player {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+.player:last-child {
+  border-bottom: none;
+}
+.player div {
+  float: left;
+}
+.loser {
+  border-top: 1px solid #cbccce;
+}
+
+.fa-times {
+  color: red;
+  text-decoration: none;
+}
+.player__icon {
+  width: 10%;
+  margin-right: 10px;
+}
+.player__date {
+  width: 25%;
+  margin-right: 10px;
+}
+.player__name {
+  width: 50%;
+}
+.player__total {
+  width: 10%;
+  text-align: right;
+}
+.bottom {
+  border-top: 1px solid #cbccce;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.title-cont {
+}
+
+.fa-crown {
+  color: goldenrod;
+}
+
+.fa-thumbs-down {
+  color: red;
+}
+
+.hide {
+  display: none;
+}
+
+.red {
+  color: red;
+}
+.green {
+  color: green;
+}

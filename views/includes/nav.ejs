@@ -1,9 +1,8 @@
-
-<nav class="navbar navbar-expand-lg">
+<nav class="navbar navbar-expand-lg navbar-dark">
   <div class="container-fluid">
     <a class="navbar-brand" href="#"></a>
     <button
-      class="navbar-toggler"
+      class="navbar-toggler custom-toggler"
       type="button"
       data-bs-toggle="collapse"
       data-bs-target="#navbarSupportedContent"
@@ -14,6 +13,9 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <!-- Put back on line 4 if broken -->
+      <!-- <a class="navbar-brand" href="#"></a> -->
+      <!--  -->
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
           <a
@@ -24,7 +26,11 @@
           >
         </li>
         <li class="nav-item">
-          <a class="nav-link <%= path === '/game/score' ? 'active' : ''%>" href="/game/score">Scoreboard</a>
+          <a
+            class="nav-link <%= path === '/game/score' ? 'active' : ''%>"
+            href="/game/score"
+            >Scoreboard</a
+          >
         </li>
         <% if (isAuthenticated) { %>
         <li class="nav-item">
@@ -63,7 +69,16 @@
         <li class="nav-item">
           <form action="/auth/logout" method="POST">
             <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
-            <button class="btn btn-primary">Logout</button>
+            <button
+              class="btn btn-primary"
+              style="
+                background-color: #046865;
+                border-color: #046865;
+                font-family: 'Poppins', sans-serif;
+              "
+            >
+              Logout
+            </button>
           </form>
         </li>
         <% } %>
@@ -71,4 +86,3 @@
     </div>
   </div>
 </nav>
-

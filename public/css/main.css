@@ -1,4 +1,3 @@
-
 * {
   box-sizing: border-box;
 }
@@ -13,8 +12,6 @@ main {
   margin: 0;
   height: 100vh;
 }
-
-
 
 h1,
 h2,
@@ -35,42 +32,18 @@ li {
   background-color: #d7263d;
   text-align: left;
 }
-.navbar .nav-link {
-  color: white;
+.navbar-dark .navbar-nav .nav-link {
+  color: white !important;
 }
-.title {
-  background-image: url("../images/mario.jpg");
-  background-position-x: -50px;
-  background-position-y: 25%;
-  background-size: cover;
-  align-items: center;
+.custom-toggler.navbar-toggler {
+  color: white !important;
+  border: 2px solid white !important;
 }
-
-.title h1 {
-  text-align: right;
-  color: white;
-  font-size: 12.5vw;
-  padding: 5% 10% 10% 50%;
+.custom-toggler .navbar-toggler-icon {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255, 255, 255, 1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
 }
-.error-message {
-  padding: 1rem;
-  margin-bottom: 2rem;
-  border: 2px solid #ffe900;
-}
-.error-title {
-  font-size: 1em;
-  font-family: "Poppins", sans-serif;
-  text-align: center;
-  color: #d7263d;
-}
-.error-list {
-  list-style-type: none;
-  font-size: 1em;
-  padding: 0;
-  margin: 0;
-}
-.game-info {
-  margin: 0 auto;
+.navbar-toggler:focus {
+  box-shadow: none !important;
 }
 
 .login-page,
@@ -89,26 +62,90 @@ li {
 .signup-page a {
   color: #046865;
 }
+.title {
+  position: relative;
+  background-image: url("../images/mario.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  height: 30vh;
+}
+
+.title h1 {
+  position: absolute;
+  right: 5%;
+  top: 25%;
+  width: 55%;
+  text-align: right;
+  color: white;
+  font-size: 12.5vw;
+  line-height: 0.75;
+}
+
+.error-message {
+  padding: 1rem;
+  margin-bottom: 2rem;
+  border: 2px solid #ffe900;
+}
+.error-title {
+  font-size: 1em;
+  font-family: "Poppins", sans-serif;
+  text-align: center;
+  color: #d7263d;
+}
+.error-list {
+  list-style-type: none;
+  font-size: 1em;
+  padding: 0;
+  margin: 0;
+}
+.homepage {
+  background-color: rgba(4, 104, 101, 1);
+  z-index: -2;
+}
+.homepage section {
+  padding: 0 2rem;
+  z-index: 1;
+}
+
+.game-info {
+  display: inherit;
+}
+.game-info .col {
+  flex: none;
+}
+.game-info-item ul li {
+  font-size: 1.25em;
+  color: white;
+}
+.game-info-item img {
+  width: 100%;
+}
+#app {
+  background-color: rgba(4, 104, 101, 1);
+}
 .game-image {
   background-image: url(../images/all-game-image-large.jpg);
-  background-size: contain;
   background-repeat: no-repeat;
-  height: 20vh;
+  background-size: cover;
+  background-position: center;
+  height: 30vh;
 }
 .main-404 {
-  background-image: url(../images/404-small.jpg);
-  background-size: cover;
-  height: 100vh;
-  overflow: hidden;
-  /* background-position-x: 50%; */
+  background-image: url(../images/404.jpg);
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
 }
+
 .main-500 {
   background-image: url(../images/500-page.jpg);
-  background-size: cover;
   height: 100vh;
-  overflow: hidden;
-  /* background-position-x: 50%; */
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
 }
+
 footer {
   background-color: #d7263d;
   color: white;
@@ -117,14 +154,38 @@ footer {
 footer p {
   padding: 2em;
 }
-@media (min-width: 550px) {
-  .main-404 {
-    background-image: url("../images/404.jpg");
-  }
-}
 
-@media (min-width: 600px) {
-  title {
-    height: 35vh;
+@media (min-width: 700px) {
+  .login-page,
+  .signup-page,
+  .all-games-page,
+  .edit-all-games,
+  .reset-page {
+    margin: 3% 25%;
+  }
+  .title {
+    height: 45vh;
+  }
+  .title h1 {
+    top: 10%;
   }
 }
+@media (min-width: 1000px) {
+  .game-info-item {
+    margin: 0 3rem;
+  }
+  .game-info {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    padding-top: 2rem;
+  }
+  .game-info .col {
+    flex: 1 0 0%;
+  }
+}
+/* @media (min-width: 800px) {
+  .title h1 {
+    top: 10%;
+  }
+} */

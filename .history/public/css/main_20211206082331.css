@@ -1,0 +1,133 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  padding: 0;
+  margin: 0;
+}
+
+main {
+  padding: 0;
+  margin: 0;
+  height: 100vh;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Road Rage", cursive;
+}
+
+p,
+a,
+li {
+  font-family: "Poppins", sans-serif;
+}
+
+.navbar {
+  background-color: #d7263d;
+  text-align: left;
+}
+.navbar .nav-link {
+  color: white;
+}
+/* .title {
+  background-image: url("../images/mario.jpg");
+  background-position-x: -50px;
+  background-position-y: 25%;
+  background-size: cover;
+  align-items: center;
+} */
+.title {
+  background-image: url("../images/mario.jpg");
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+}
+
+.title h1 {
+  text-align: right;
+  color: white;
+  font-size: 12.5vw;
+  padding: 5% 10% 10% 50%;
+}
+.error-message {
+  padding: 1rem;
+  margin-bottom: 2rem;
+  border: 2px solid #ffe900;
+}
+.error-title {
+  font-size: 1em;
+  font-family: "Poppins", sans-serif;
+  text-align: center;
+  color: #d7263d;
+}
+.error-list {
+  list-style-type: none;
+  font-size: 1em;
+  padding: 0;
+  margin: 0;
+}
+.game-info {
+  margin: 0 auto;
+}
+
+.login-page,
+.signup-page,
+.all-games-page,
+.edit-all-games,
+.reset-page {
+  margin: 2rem;
+}
+.login-div h2,
+.signup-div h2 {
+  font-size: 3em;
+  line-height: 0.75;
+}
+.login-page a,
+.signup-page a {
+  color: #046865;
+}
+.game-image {
+  background-image: url(../images/all-game-image-large.jpg);
+  background-size: contain;
+  background-repeat: no-repeat;
+  height: 20vh;
+}
+.main-404 {
+  background-image: url(../images/404-small.jpg);
+  background-size: cover;
+  height: 100vh;
+  overflow: hidden;
+  /* background-position-x: 50%; */
+}
+.main-500 {
+  background-image: url(../images/500-page.jpg);
+  background-size: cover;
+  height: 100vh;
+  overflow: hidden;
+  /* background-position-x: 50%; */
+}
+footer {
+  background-color: #d7263d;
+  color: white;
+  margin: 0;
+}
+footer p {
+  padding: 2em;
+}
+@media (min-width: 550px) {
+  .main-404 {
+    background-image: url("../images/404.jpg");
+  }
+}
+
+@media (min-width: 600px) {
+  title {
+    height: 35vh;
+  }
+}

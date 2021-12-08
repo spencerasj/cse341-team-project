@@ -1,0 +1,40 @@
+    <%- include('../includes/head.ejs') %>
+  </head>
+
+  <body>
+    <%- include('../includes/nav.ejs') %>
+
+    <div class="row game-image">
+    </div>
+    <main class="all-games-page">
+      <div class="row game-image">
+      </div>
+      <div>
+        <% if (games.length > 0) { %>
+        <p class="text-center text-gray-600 mt-2">
+          Click a game to edit or delete.
+        </p>
+        <% } %>
+        
+      </div>
+
+      <h2>Welcome <%= user.name %></h2>
+
+      <ul>
+        <% for (let game of games) { %>
+        <li>
+          <span style="font-weight: bold"><%= game.name %></span>
+
+          <span> <%= game.description %> </span>
+          <span> Game Masters: <% for (let gameMaster of game.gameMasters) { %> <%= gameMaster.name %> <% } %></span>
+          <a href="/game/edit/<%= game._id %>?edit=true">Edit</a>
+        </li>
+        <% } %>
+      </ul>
+
+      <a href="/game/add"> Create a new game </a>
+    </div>
+
+    <%- include('../includes/footer.ejs') %>
+  </body>
+</html>

@@ -1,0 +1,243 @@
+    <%- include('../includes/head.ejs') %>
+    <link rel="stylesheet" href="/css/forms.css">
+  </head>
+
+  <body>
+    <%- include ("../includes/nav.ejs") %>
+
+    <main class="edit-all-games-page overlay">
+      <div class="edit-all-games">
+        <h1><%= title %></h1>
+
+        <% if (errorMessage) { %>
+        <div>
+          <div>
+            <div class="error-message">
+              <h3 class="error-title">There was an error:</h3>
+              <div>
+                <ul class="error-list" role="list">
+                  <li><%= errorMessage %></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <% } %>
+
+        <form
+          method="POST"
+          action="/game/<% if (editing) { %>edit<% } else { %>add<% } %>"
+        >
+          <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+            <div class="mb-3">
+              <label
+                for="title"
+                class="form-label"
+              >
+                Game Name
+              </label>
+              <div>
+                <input
+                class="form-control"
+                  required
+                  type="text"
+                  name="name"
+                  id="name"
+                  class="form-control"
+                  value="<% if
+                  (editing || hasError) { %><%= game.name %><% } %>"
+                />
+              </div>
+            </div>
+            
+            <div class="mb-3">
+              <label class="form-label" for="description"> Description </label>
+              <div>
+                <textarea class="form-control" required id="description" name="description" rows="3">
+<% if (editing || hasError) { %><%= game.description %><% } %></textarea
+                >
+              
+            </div>
+            
+            
+            <h2>Highest Score Ever</h2>
+
+            <div class="mb-3" >
+              <label class="form-label"
+                for="highestScoreEverName"
+              >
+                Player
+              </label>
+              <div>
+
+                <input
+                class="form-control"
+                  required
+                  type="text"
+                  name="highestScoreEverName"
+                  id="highestScoreEverName"
+                  value="<% if
+                  (editing || hasError) { %><%= game.highestScoreEver.name %><% } %>"
+                />
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label
+              class="form-label"
+                for="highestScoreEverScore"
+              >
+                Score
+              </label>
+              <div>
+                <input
+                  required
+                  class="form-control"
+                  type="number"
+                  name="highestScoreEverScore"
+                  id="highestScoreEverScore"
+                  value="<% if
+                  (editing || hasError) { %><%= game.highestScoreEver.score %><% } %>"
+                />
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label
+              class="form-label"
+                for="highestScoreEverDate"
+              >
+                Date
+              </label>
+              <div>
+                <input
+                  required
+                  class="form-control"
+                  type="text"
+                  name="highestScoreEverDate"
+                  id="highestScoreEverDate"
+                  value="<% if
+                  (editing || hasError) { %><%= game.highestScoreEver.date %><% } %>"
+                />
+              </div>
+            </div>
+  
+
+            <h2>Lowest Score Ever</h2>
+
+            <div class="mb-3">
+              <label
+              class="form-label"
+                for="lowestScoreEverName"
+              >
+                Player
+              </label>
+              <div>
+                <input
+                class="form-control"
+                  required
+                  type="text"
+                  name="lowestScoreEverName"
+                  id="lowestScoreEverName"
+                  value="<% if
+                  (editing || hasError) { %><%= game.lowestScoreEver.name %><% } %>"
+                />
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label
+              class="form-label"
+                for="lowestScoreEverScore"
+              >
+                Score
+              </label>
+              <div>
+                <input
+                  required
+                  class="form-control"
+                  type="number"
+                  name="lowestScoreEverScore"
+                  id="lowestScoreEverScore"
+                  value="<% if
+                  (editing || hasError) { %><%= game.lowestScoreEver.score %><% } %>"
+                />
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label
+              class="form-label"
+                for="lowestScoreEverDate"
+              >
+                Date
+              </label>
+              <div>
+                <input
+                  required
+                  class="form-control"
+                  type="text"
+                  name="lowestScoreEverDate"
+                  id="lowestScoreEverDate"
+                  value="<% if
+                  (editing || hasError) { %><%= game.lowestScoreEver.date %><% } %>"
+                />
+              </div>
+            </div>
+
+            <% if (editing) { %>
+            <input type="hidden" name="gameId" value="<%= game._id %>" />
+            <% } %>
+
+            <div class="mb-3">
+              <button class="btn btn-primary" type="submit">
+                <% if (editing) { %>Update<% } else { %>Add<% } %> Game
+              </button>
+            </div>
+          <!-- </div> -->
+        </form>
+
+        <% if (editing) { %>
+        <form action="/game/delete" method="POST">
+          <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+          <input type="hidden" name="gameId" value="<%= game._id %>" />
+
+          <button class="btn btn-danger" type="submit" onclick="return confirm('Are you sure you want to delete this game?');">Delete</button>
+        </form>
+        <% } %>
+
+<hr>
+         <% if (editing) { %>
+          <h2>Game Masters</h2>
+          <ul>  <% for (let gameMaster of game.gameMasters) { %> 
+            <li><%= gameMaster.name %> </li>
+            <% } %>
+            </ul>
+          <hr />
+          <form action="/game/add-gamemaster" method="POST">
+
+            <div class="mb-3">
+              <label class="form-label" for="emailToAdd"> Enter an email address to add another administrator </label>
+              <div>
+                <input
+                class="form-control"
+                name="email"
+                id="emailToAdd"
+                type="email"
+                value=""
+                />
+                <input
+                name="gameId"
+                type="hidden"
+                value="<%= game._id %>"
+                />
+              </div>
+            </div>
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+            <button class="btn btn-primary" type="submit">Add</button>
+          </form>
+          <% } %> 
+      </div>
+    </main>
+  </body>
+</html>

@@ -84,7 +84,7 @@ exports.postLogin = (req, res, next) => {
         })
         .catch((err) => {
           console.log(err);
-          res.redirect("/login");
+          res.redirect("/auth/login");
         });
     })
     .catch((err) => {
@@ -201,14 +201,14 @@ exports.postReset = (req, res, next) => {
   crypto.randomBytes(32, (err, buffer) => {
     if (err) {
       console.log(err);
-      return res.redirect("/reset");
+      return res.redirect("/auth/reset");
     }
     const token = buffer.toString("hex");
     User.findOne({ email: req.body.email })
       .then((user) => {
         if (!user) {
           req.flash("error", "No account with that email found");
-          return res.redirect("/reset");
+          return res.redirect("/auth/reset");
         }
         user.resetToken = token;
         user.resetTokenExpiration = Date.now() + 3600000;
@@ -223,7 +223,7 @@ exports.postReset = (req, res, next) => {
           html: `
           <p>You requested a password reset</p>
 
-          <p>Click this <a href="${process.env.PROJECT_URL}/reset/${token}">link</a> to set a new password</p>
+          <p>Click this <a href="${process.env.PROJECT_URL}/auth/reset/${token}">link</a> to set a new password</p>
           
        `,
         });
@@ -302,7 +302,7 @@ exports.postNewPassword = (req, res, next) => {
       return resetUser.save();
     })
     .then((user) => {
-      res.redirect("/login");
+      res.redirect("/auth/login");
       transporter.sendMail({
         to: user.email,
         from: process.env.FROM_EMAIL,
